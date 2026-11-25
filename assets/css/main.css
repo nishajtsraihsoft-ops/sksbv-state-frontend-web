@@ -2611,3 +2611,72 @@ html, body {
     font-size: 13.5px;
   }
 }
+
+
+/* Forced Center-Aligned Footer for Mobile */
+@media (max-width: 767.98px) {
+  .footer {
+    text-align: center !important;
+  }
+  .footer .footer-about {
+    text-align: center !important;
+  }
+  .footer .footer-about .logo {
+    justify-content: center !important;
+    display: flex !important;
+  }
+  .footer .footer-about p {
+    text-align: center !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+  .footer .social-links {
+    justify-content: center !important;
+  }
+  .footer h4 {
+    text-align: center !important;
+  }
+  .footer h4::after,
+  .footer .footer-links h4::after,
+  .footer .footer-contact h4::after {
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+  }
+  .footer .footer-links {
+    text-align: center !important;
+    padding: 0 10px !important;
+  }
+  .footer .footer-links ul {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    padding: 0 !important;
+    margin: 0 auto !important;
+  }
+  .footer .footer-links ul li {
+    text-align: center !important;
+    justify-content: center !important;
+    width: 100% !important;
+  }
+  .footer .footer-links ul a {
+    text-align: center !important;
+    display: inline-block !important;
+  }
+  .footer .footer-contact {
+    text-align: center !important;
+  }
+  .footer .footer-contact p,
+  .footer .contact-info-list,
+  .footer .contact-info-list p {
+    text-align: center !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+  .footer .copyright,
+  .footer .credits {
+    text-align: center !important;
+  }
+}
+

@@ -7,7 +7,7 @@ const Footer = () => {
             <div className="container footer-top">
                 <div className="row gy-4 text-center text-md-start">
                     {/* Brand & About */}
-                    <div className="col-lg-4 col-md-12 col-12 footer-about mb-4 mb-lg-0">
+                    <div className="col-lg-4 col-md-12 col-12 footer-about mb-4 mb-lg-0 text-center text-md-start">
                         <Link to="/" className="logo d-flex align-items-center justify-content-center justify-content-md-start">
                             <img src={`${import.meta.env.BASE_URL}assets/img/logo.png`} alt="SKSBV Logo" />
                             <div className="d-flex flex-column align-items-center align-items-md-start">
@@ -27,8 +27,8 @@ const Footer = () => {
                         </div>
                     </div>
 
-                    {/* Useful Links - 2 columns on mobile */}
-                    <div className="col-lg-2 col-md-3 col-6 footer-links mb-3 mb-md-0">
+                    {/* Useful Links - centered on mobile */}
+                    <div className="col-lg-2 col-md-3 col-6 footer-links mb-3 mb-md-0 text-center text-md-start">
                         <h4>Useful Links</h4>
                         <ul className="list-unstyled">
                             <li><Link to="/">Home</Link></li>
@@ -40,8 +40,8 @@ const Footer = () => {
                         </ul>
                     </div>
 
-                    {/* Resources */}
-                    <div className="col-lg-2 col-md-3 col-6 footer-links mb-3 mb-md-0">
+                    {/* Resources - centered on mobile */}
+                    <div className="col-lg-2 col-md-3 col-6 footer-links mb-3 mb-md-0 text-center text-md-start">
                         <h4>Resources</h4>
                         <ul className="list-unstyled">
                             <li><Link to="/circulars">Circulars</Link></li>
@@ -50,13 +50,13 @@ const Footer = () => {
                         </ul>
                     </div>
 
-                    {/* Contact Us */}
+                    {/* Contact Us - centered on mobile */}
                     <div className="col-lg-4 col-md-6 col-12 footer-contact text-center text-md-start">
                         <h4>Contact Us</h4>
-                        <p className="mb-2"><strong>Office:</strong> SKSBV, Samasthalayam, Chelari, Thenhippalam P.O, PIN: 673636</p>
-                        <div className="contact-info-list">
-                            <p className="mb-1"><strong>Phone:</strong> <a href="tel:+918714608987" className="text-decoration-none text-reset">+91 8714608987</a></p>
-                            <p className="mb-0"><strong>Email:</strong> <a href="mailto:sksbvstate@gmail.com" className="text-decoration-none text-reset">sksbvstate@gmail.com</a></p>
+                        <p className="mb-2 text-center text-md-start mx-auto mx-md-0"><strong>Office:</strong> SKSBV, Samasthalayam, Chelari, Thenhippalam P.O, PIN: 673636</p>
+                        <div className="contact-info-list text-center text-md-start">
+                            <p className="mb-1 text-center text-md-start"><strong>Phone:</strong> <a href="tel:+918714608987" className="text-decoration-none text-reset">+91 8714608987</a></p>
+                            <p className="mb-0 text-center text-md-start"><strong>Email:</strong> <a href="mailto:sksbvstate@gmail.com" className="text-decoration-none text-reset">sksbvstate@gmail.com</a></p>
                         </div>
                     </div>
                 </div>
