@@ -23,15 +23,6 @@ dist-ssr
 *.sln
 *.sw?
 
-
-# Images
-*.jpg
-*.jpeg
-*.png
-*.gif
-*.webp
-*.svg
-
 # Videos
 *.mp4
 *.mov
