@@ -57,7 +57,7 @@ const Gallery = () => {
     <main className="main">
       <PageTitle title="Gallery" current="Gallery" />
 
-      <section id="gallery" className="gallery section">
+      <section id="gallery" className="gallery section py-4 py-md-5">
         <div className="container" data-aos="fade-up">
           <div className="gallery-grid">
             {images.map((item, index) => {
@@ -71,6 +71,7 @@ const Gallery = () => {
                   <img
                     src={src}
                     alt={`Gallery ${index + 1}`}
+                    loading="lazy"
                     onError={(e) => {
                       e.target.src = `https://placehold.co/400x300?text=Image+${index + 1}`;
                     }}
@@ -161,10 +162,11 @@ const Gallery = () => {
         @media (max-width: 992px) {
           .gallery-grid {
             grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
           }
 
           .gallery-item img {
-            height: 200px;
+            height: 180px;
           }
         }
 
@@ -172,10 +174,21 @@ const Gallery = () => {
         @media (max-width: 576px) {
           .gallery-grid {
             grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+          }
+
+          .gallery-item {
+            border-radius: 8px;
           }
 
           .gallery-item img {
-            height: 160px;
+            height: 130px;
+          }
+
+          .zoom-btn {
+            width: 36px;
+            height: 36px;
+            font-size: 15px;
           }
         }
       `}</style>

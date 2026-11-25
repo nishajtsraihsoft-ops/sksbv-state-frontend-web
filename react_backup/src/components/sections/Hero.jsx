@@ -16,13 +16,13 @@ const Hero = () => {
             <div className="container position-relative" data-aos="fade-up" data-aos-delay="100">
                 <div className="row align-items-center min-vh-80">
                     <div className="col-lg-6">
-                        <div className="hero-content" data-aos="fade-right" data-aos-delay="200">
-                            <div className="premium-badge mb-4">
+                        <div className="hero-content text-center text-lg-start" data-aos="fade-right" data-aos-delay="200">
+                            <div className="premium-badge mb-3 mb-md-4">
                                 <span className="badge-dot pulse"></span>
                                 <span className="badge-text">Visionary Leadership • Ethical Excellence</span>
                             </div>
 
-                            <h1 className="mb-4 display-3 fw-extra-bold tracking-tight">
+                            <h1 className="mb-3 mb-md-4 display-3 fw-extra-bold tracking-tight">
                                 Samastha Kerala <br className="d-none d-md-block" />
                                 <span className="gradient-text-shimmer">Sunni Bala Vedi</span> <br />
                                 <span className="accent-text-glow">SKSBV State</span>
@@ -34,7 +34,7 @@ const Hero = () => {
                                 <span className="d-block mt-3 fw-medium text-dark-soft">Under the aegis of Jem-lyyathul Mu'allimeen Central Council.</span>
                             </p>
 
-                            <div className="hero-buttons d-flex flex-row gap-3 justify-content-center justify-content-lg-start align-items-center">
+                            <div className="hero-buttons d-flex flex-column flex-sm-row gap-3 justify-content-center justify-content-lg-start align-items-center">
                                 <Link to="/about" className="btn btn-premium-primary group">
                                     <span>Our Mission</span>
                                     <i className="bi bi-arrow-right ms-2 transition-transform group-hover-translate-x"></i>
@@ -48,17 +48,17 @@ const Hero = () => {
                     </div>
 
                     <div className="col-lg-6">
-                        <div className="hero-image-wrapper mt-5 mt-lg-0" data-aos="fade-left" data-aos-delay="300">
+                        <div className="hero-image-wrapper mt-4 mt-lg-0 text-center" data-aos="fade-left" data-aos-delay="300">
                             <div className="image-glow-ring"></div>
-                            <img src="/assets/img/home/heroimage.png" alt="Hero Image" className="img-fluid floating-img-refined shadow-3xl" />
+                            <img src={`${import.meta.env.BASE_URL}assets/img/home/heroimage.png`} alt="Hero Image" className="img-fluid floating-img-refined shadow-3xl mx-auto" />
 
-                            <div className="advanced-glass-card shadow-2xl p-4">
+                            <div className="advanced-glass-card shadow-2xl p-3 p-md-4">
                                 <div className="card-top-accent"></div>
                                 <i className="bi bi-quote quote-icon mb-2"></i>
                                 <p className="mb-0 italic-style text-dark fw-semibold leading-relaxed">
                                     “Show mercy to those on the earth, and the One in the heavens will show mercy to you.”
                                 </p>
-                                <div className="author-wrapper mt-3 d-flex align-items-center">
+                                <div className="author-wrapper mt-2 mt-md-3 d-flex align-items-center justify-content-center justify-content-md-start">
                                     <div className="author-line"></div>
                                     <span className="quote-author">Muhammad ﷺ ibn Abdullah</span>
                                 </div>
@@ -67,7 +67,7 @@ const Hero = () => {
                     </div>
                 </div>
 
-                <div className="row g-4 mt-5 pt-lg-4" data-aos="fade-up" data-aos-delay="400">
+                <div className="row g-2 g-sm-3 g-md-4 mt-4 mt-md-5 pt-lg-4" data-aos="fade-up" data-aos-delay="400">
                     {[
                         { icon: "bi-calendar-check", val: "1993", label: "Established", color: "#0d83fd" },
                         { icon: "bi-journal-text", val: "10,000+", label: "Active Units", color: "#10b981" },
@@ -98,7 +98,7 @@ const Hero = () => {
                     min-height: 95vh;
                     display: flex;
                     align-items: center;
-                    padding: 140px 0 100px;
+                    padding: 130px 0 90px;
                 }
                 .hero-bg-canvas {
                     position: absolute;
@@ -166,21 +166,22 @@ const Hero = () => {
                     display: inline-flex;
                     align-items: center;
                     background: rgba(13, 131, 253, 0.05);
-                    padding: 10px 20px;
+                    padding: 8px 18px;
                     border-radius: 100px;
                     border: 1px solid rgba(13, 131, 253, 0.1);
                     backdrop-filter: blur(5px);
                 }
-                .badge-text { font-size: 12px; font-weight: 700; color: #0d83fd; text-transform: uppercase; letter-spacing: 1.5px; }
+                .badge-text { font-size: 11px; font-weight: 700; color: #0d83fd; text-transform: uppercase; letter-spacing: 1.2px; }
 
                 .btn-premium-primary {
                     background: linear-gradient(135deg, #0d83fd 0%, #2563eb 100%);
                     color: white;
-                    padding: 16px 36px;
+                    padding: 14px 32px;
                     border-radius: 14px;
                     font-weight: 700;
                     display: inline-flex;
                     align-items: center;
+                    justify-content: center;
                     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1);
                     box-shadow: 0 10px 25px rgba(13, 131, 253, 0.25);
                 }
@@ -195,11 +196,12 @@ const Hero = () => {
                 .btn-premium-outline {
                     background: white;
                     color: #1e293b;
-                    padding: 16px 36px;
+                    padding: 14px 32px;
                     border-radius: 14px;
                     font-weight: 700;
                     display: inline-flex;
                     align-items: center;
+                    justify-content: center;
                     transition: all 0.3s ease;
                     border: 1.5px solid #e2e8f0;
                 }
@@ -210,7 +212,7 @@ const Hero = () => {
                     background: #f8fbff;
                 }
 
-                .hero-image-wrapper { position: relative; z-index: 1; padding: 20px; }
+                .hero-image-wrapper { position: relative; z-index: 1; padding: 15px; }
                 .image-glow-ring {
                     position: absolute;
                     inset: 0;
@@ -227,23 +229,24 @@ const Hero = () => {
                     border-radius: 40px;
                     position: relative;
                     z-index: 2;
+                    max-height: 480px;
                 }
                 @keyframes float-refined {
                     0%, 100% { transform: translateY(0) rotate(0deg); }
-                    50% { transform: translateY(-25px) rotate(1deg); }
+                    50% { transform: translateY(-18px) rotate(1deg); }
                 }
 
                 .advanced-glass-card {
                     position: absolute;
                     bottom: -15px;
                     right: -10px;
-                    background: rgba(255, 255, 255, 0.9);
+                    background: rgba(255, 255, 255, 0.92);
                     backdrop-filter: blur(20px);
-                    border: 1px solid rgba(255, 255, 255, 0.5);
-                    border-radius: 24px;
+                    border: 1px solid rgba(255, 255, 255, 0.6);
+                    border-radius: 20px;
                     max-width: 360px;
                     z-index: 3;
-                    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+                    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.12);
                 }
                 .card-top-accent {
                     position: absolute;
@@ -258,19 +261,19 @@ const Hero = () => {
                 /* Compact "Small Box" Stats */
                 .compact-stat-box {
                     position: relative;
-                    padding: 24px 20px;
-                    background: rgba(255, 255, 255, 0.7);
+                    padding: 22px 18px;
+                    background: rgba(255, 255, 255, 0.85);
                     backdrop-filter: blur(15px) saturate(160%);
-                    border: 1px solid rgba(255, 255, 255, 0.5);
-                    border-radius: 24px;
+                    border: 1px solid rgba(255, 255, 255, 0.6);
+                    border-radius: 20px;
                     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1);
                     overflow: hidden;
                     height: 100%;
                 }
                 .compact-stat-box:hover {
                     background: #ffffff;
-                    transform: translateY(-8px);
-                    box-shadow: 0 30px 60px -15px rgba(0,0,0,0.1);
+                    transform: translateY(-6px);
+                    box-shadow: 0 20px 45px -10px rgba(0,0,0,0.08);
                     border-color: var(--card-accent);
                 }
                 .stat-box-inner {
@@ -282,8 +285,8 @@ const Hero = () => {
                     text-align: center;
                 }
                 .stat-box-icon {
-                    width: 44px;
-                    height: 44px;
+                    width: 42px;
+                    height: 42px;
                     background: color-mix(in srgb, var(--card-accent) 10%, #fff);
                     color: var(--card-accent);
                     border-radius: 12px;
@@ -291,16 +294,16 @@ const Hero = () => {
                     align-items: center;
                     justify-content: center;
                     font-size: 18px;
-                    margin-bottom: 12px;
+                    margin-bottom: 10px;
                     transition: all 0.3s ease;
                 }
                 .compact-stat-box:hover .stat-box-icon {
                     background: var(--card-accent);
                     color: white;
-                    transform: scale(1.1);
+                    transform: scale(1.08);
                 }
                 .stat-box-val {
-                    font-size: 1.5rem;
+                    font-size: 1.45rem;
                     font-weight: 800;
                     color: #0f172a;
                     margin-bottom: 2px;
@@ -311,7 +314,7 @@ const Hero = () => {
                     font-weight: 700;
                     color: #64748b;
                     text-transform: uppercase;
-                    letter-spacing: 1.5px;
+                    letter-spacing: 1.2px;
                     margin-bottom: 0;
                 }
                 .stat-box-glow {
@@ -329,21 +332,29 @@ const Hero = () => {
                 }
 
                 @media (max-width: 991px) {
-                    .hero { text-align: center; padding-top: 80px; }
+                    .hero { text-align: center; padding-top: 100px; min-height: auto; }
                     .hero-buttons { justify-content: center !important; }
                     .advanced-glass-card {
                         position: relative;
                         bottom: auto; right: auto;
-                        margin: -50px auto 40px;
+                        margin: -35px auto 30px;
                         max-width: 95%;
                     }
                     .text-muted-premium { margin: 0 auto 30px; }
-                    .display-3 { font-size: 3rem; }
+                    .display-3 { font-size: 2.75rem; }
                 }
                 @media (max-width: 575px) {
-                    .display-3 { font-size: 2.25rem; }
-                    .hero-buttons { flex-direction: column !important; }
-                    .btn-premium-primary, .btn-premium-outline { width: 100%; justify-content: center; }
+                    .hero { padding: 90px 0 50px !important; }
+                    .display-3 { font-size: 2rem !important; line-height: 1.2 !important; }
+                    .hero-buttons { flex-direction: column !important; width: 100%; gap: 10px !important; }
+                    .btn-premium-primary, .btn-premium-outline { width: 100% !important; justify-content: center !important; padding: 13px 20px !important; }
+                    .compact-stat-box { padding: 14px 8px !important; border-radius: 16px !important; }
+                    .stat-box-icon { width: 34px !important; height: 34px !important; font-size: 15px !important; margin-bottom: 6px !important; }
+                    .stat-box-val { font-size: 1.2rem !important; }
+                    .stat-box-lbl { font-size: 8.5px !important; letter-spacing: 0.5px !important; }
+                    .advanced-glass-card { padding: 14px 16px !important; margin: -25px 8px 20px !important; }
+                    .advanced-glass-card p { font-size: 13.5px !important; }
+                    .badge-text { font-size: 10px !important; letter-spacing: 0.8px !important; }
                 }
             `}</style>
         </section>
