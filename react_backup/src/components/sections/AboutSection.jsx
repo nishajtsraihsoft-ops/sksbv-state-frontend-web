@@ -123,6 +123,16 @@ const AboutSection = () => {
                     z-index: 3;
                     border: 1px solid rgba(0, 0, 0, 0.06);
                 }
+                @media (max-width: 575px) {
+                    .experience-badge {
+                        bottom: -12px;
+                        right: 8px;
+                        padding: 6px 12px !important;
+                    }
+                    .experience-badge .display-6 {
+                        font-size: 1.6rem !important;
+                    }
+                }
                 .pillar-card {
                     border: 1px solid rgba(0, 0, 0, 0.05) !important;
                 }

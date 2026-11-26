@@ -118,7 +118,7 @@ const Circulars = () => {
                                             </div>
 
                                             {/* Right action */}
-                                            <div className="d-flex align-items-center gap-2 justify-content-end">
+                                            <div className="d-flex align-items-center gap-2 justify-content-end w-100-sm">
                                                 <a 
                                                     href={fileUrl} 
                                                     target="_blank" 

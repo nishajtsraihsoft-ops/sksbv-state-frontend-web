@@ -273,6 +273,15 @@ const GallerySection = () => {
                     height: 52px;
                     background: rgba(13, 131, 253, 0.08);
                 }
+                @media (max-width: 576px) {
+                    .gallery-img-wrapper, .skeleton-card {
+                        height: 210px;
+                    }
+                    .gallery-cta-btn {
+                        width: 100%;
+                        justify-content: center;
+                    }
+                }
             `}</style>
         </section>
     );

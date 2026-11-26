@@ -261,7 +261,7 @@ const Hero = () => {
                 }
                 @media (max-width: 768px) {
                     .hero {
-                        padding: 100px 0 50px;
+                        padding: 95px 0 45px;
                     }
                     .compact-stat-box .stat-box-inner {
                         padding: 12px !important;
@@ -270,6 +270,38 @@ const Hero = () => {
                         width: 36px;
                         height: 36px;
                         font-size: 17px;
+                    }
+                }
+                @media (max-width: 480px) {
+                    .hero-heading {
+                        font-size: clamp(1.85rem, 8vw, 2.3rem) !important;
+                    }
+                    .hero-buttons {
+                        flex-direction: column;
+                        width: 100%;
+                    }
+                    .hero-buttons .btn {
+                        width: 100%;
+                        justify-content: center;
+                    }
+                    .compact-stat-box .stat-box-inner {
+                        flex-direction: column;
+                        align-items: flex-start !important;
+                        gap: 6px !important;
+                        padding: 10px !important;
+                    }
+                    .stat-box-icon {
+                        width: 32px;
+                        height: 32px;
+                        font-size: 15px;
+                    }
+                    .stat-box-val {
+                        font-size: 1.15rem !important;
+                    }
+                    .advanced-glass-card {
+                        width: 100% !important;
+                        max-width: 100% !important;
+                        margin: -25px 0 0 0 !important;
                     }
                 }
             `}</style>
