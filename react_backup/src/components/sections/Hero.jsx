@@ -146,7 +146,7 @@ const Hero = () => {
                     min-height: auto;
                     display: flex;
                     align-items: center;
-                    padding: 95px 0 35px;
+                    padding: 115px 0 35px;
                     background-color: #030b18;
                 }
 
@@ -336,7 +336,7 @@ const Hero = () => {
 
                 @media (max-width: 768px) {
                     .hero-modern-section {
-                        padding: 85px 0 30px;
+                        padding: 95px 0 30px;
                     }
                     .hero-main-title {
                         font-size: clamp(1.8rem, 6.5vw, 2.3rem);
@@ -350,7 +350,7 @@ const Hero = () => {
 
                 @media (max-width: 480px) {
                     .hero-modern-section {
-                        padding: 78px 0 25px;
+                        padding: 90px 0 25px;
                     }
                     .btn-hero-primary, .btn-hero-outline {
                         width: 100%;

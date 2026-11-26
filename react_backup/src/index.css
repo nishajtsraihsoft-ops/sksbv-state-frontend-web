@@ -80,12 +80,6 @@ body {
   line-height: 1.6;
 }
 
-@media (max-width: 1199px) {
-  body {
-    padding-top: 80px;
-  }
-}
-
 a {
   color: var(--accent-color);
   text-decoration: none;

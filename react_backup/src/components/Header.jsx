@@ -34,9 +34,11 @@ const Header = () => {
     setUpdatesDropdownOpen(false);
   };
 
+  const isOverHero = location.pathname === '/' && !scrolled;
+
   return (
     <>
-      <header id="header" className={`header d-flex align-items-center fixed-top ${scrolled ? 'header-scrolled shadow-sm' : ''}`}>
+      <header id="header" className={`header d-flex align-items-center fixed-top ${scrolled ? 'header-scrolled shadow-sm' : ''} ${isOverHero ? 'header-over-hero' : ''}`}>
         <div className="header-container container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
 
           {/* Brand Logo */}
@@ -383,6 +385,43 @@ const Header = () => {
           background: rgba(255, 255, 255, 0.98) !important;
           box-shadow: 0 4px 20px rgba(0, 0, 0, 0.07) !important;
           height: 68px;
+        }
+        .header.header-over-hero {
+          background: transparent !important;
+          border-bottom: none !important;
+          backdrop-filter: none !important;
+          -webkit-backdrop-filter: none !important;
+        }
+        .header.header-over-hero .header-container {
+          background: rgba(3, 15, 34, 0.35) !important;
+          backdrop-filter: blur(10px) !important;
+          -webkit-backdrop-filter: blur(10px) !important;
+          border: 1px solid rgba(255, 255, 255, 0.16) !important;
+          box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15) !important;
+        }
+        .header.header-over-hero .brand-title {
+          color: #ffffff !important;
+        }
+        .header.header-over-hero .brand-subtitle {
+          color: #7dd3fc !important;
+        }
+        .header.header-over-hero .navmenu > ul > li > a {
+          color: rgba(255, 255, 255, 0.92) !important;
+        }
+        .header.header-over-hero .navmenu > ul > li > a:hover,
+        .header.header-over-hero .navmenu > ul > li > a.active {
+          color: #7dd3fc !important;
+        }
+        .header.header-over-hero .mobile-nav-toggle-btn {
+          background: rgba(255, 255, 255, 0.12);
+          border-color: rgba(255, 255, 255, 0.25);
+        }
+        .header.header-over-hero .mobile-nav-toggle-btn .hamburger-line {
+          background: #ffffff;
+        }
+        .header.header-over-hero .mobile-nav-toggle-btn.active {
+          background: #0d83fd;
+          border-color: #0d83fd;
         }
         .logo-img-box {
           width: 42px;
