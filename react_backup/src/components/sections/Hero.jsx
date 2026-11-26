@@ -66,12 +66,12 @@ const Hero = () => {
                             </div>
 
                             {/* Mission Narrative */}
-                            <p className="hero-lead-text text-white mb-4 mx-auto mx-lg-0">
+                            <p className="hero-lead-text text-white mb-2 mb-md-4 mx-auto mx-lg-0">
                                 The premier student wing under the aegis of the Samastha Kerala Islam Matha Vidyabhyasa Board and Jem-Iyyathul Mu'allimeen. Nurturing Islamic character, moral discipline, and intellectual leadership across thousands of madrassas.
                             </p>
 
-                            {/* Essential CTA Buttons Only */}
-                            <div className="d-flex flex-wrap gap-3 justify-content-center justify-content-lg-start align-items-center">
+                            {/* Essential CTA Buttons (Hidden on mobile screens) */}
+                            <div className="d-none d-md-flex flex-wrap gap-3 justify-content-center justify-content-lg-start align-items-center">
                                 <Link to="/about" className="btn btn-hero-primary shadow-lg d-inline-flex align-items-center gap-2">
                                     <span>Our Mission</span>
                                     <i className="bi bi-arrow-right"></i>
