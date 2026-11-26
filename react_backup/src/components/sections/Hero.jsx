@@ -9,6 +9,10 @@ const HERO_SLIDES = [
     {
         image: '/assets/img/home/hero-section-image-2.jpeg',
         tag: 'Empowering Students Across Kerala'
+    },
+    {
+        image: '/assets/img/home/hero-section-image-3.jpeg',
+        tag: '30+ Years of Educational Guidance'
     }
 ];
 
