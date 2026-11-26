@@ -4,13 +4,11 @@ import { Link } from 'react-router-dom';
 const HERO_SLIDES = [
     {
         image: '/assets/img/home/hero-section-image-1.jpeg',
-        tag: 'State Conference & Student Gatherings',
-        title: 'Empowering the New Generation with Faith & Character'
+        tag: 'Visionary Leadership • Moral Excellence'
     },
     {
         image: '/assets/img/home/hero-section-image-2.jpeg',
-        tag: 'Decades of Moral & Academic Leadership',
-        title: 'Inspiring Millions Across 10,000+ Units Statewide'
+        tag: 'Empowering Students Across Kerala'
     }
 ];
 
@@ -25,17 +23,9 @@ const Hero = () => {
         return () => clearInterval(timer);
     }, []);
 
-    const nextSlide = () => {
-        setCurrentSlide((prev) => (prev + 1) % HERO_SLIDES.length);
-    };
-
-    const prevSlide = () => {
-        setCurrentSlide((prev) => (prev - 1 + HERO_SLIDES.length) % HERO_SLIDES.length);
-    };
-
     return (
         <section id="hero" className="hero-modern-section position-relative overflow-hidden text-white">
-            {/* Dynamic Background Slides with reduced fade effect */}
+            {/* Dynamic Background Slides */}
             <div className="hero-bg-slider-container">
                 {HERO_SLIDES.map((slide, idx) => (
                     <div
@@ -45,7 +35,6 @@ const Hero = () => {
                         aria-hidden={currentSlide !== idx}
                     />
                 ))}
-                {/* Clean, Lightened Overlay so background images are clearly visible */}
                 <div className="hero-dark-overlay"></div>
                 <div className="hero-mesh-accent"></div>
             </div>
@@ -66,170 +55,72 @@ const Hero = () => {
                             {/* Main Title */}
                             <h1 className="fw-extra-bold hero-main-title mb-2 tracking-tight">
                                 Samastha Kerala <br />
-                                <span className="hero-gradient-text">Sunni Bala Vedi</span>
+                                <span className="hero-highlight-text">Sunni Bala Vedi</span>
                             </h1>
 
                             {/* Malayalam Subtitle Pill */}
-                            <div className="mb-2 d-inline-block">
+                            <div className="mb-3 d-inline-block">
                                 <span className="hero-malayalam-badge px-3 py-1 rounded-pill">
                                     സമസ്ത കേരള സുന്നീ ബാല വേദി (സംസ്ഥാന കമ്മറ്റി)
                                 </span>
                             </div>
 
                             {/* Mission Narrative */}
-                            <p className="hero-lead-text text-white mb-3 mx-auto mx-lg-0">
+                            <p className="hero-lead-text text-white mb-4 mx-auto mx-lg-0">
                                 The premier student wing under the aegis of the Samastha Kerala Islam Matha Vidyabhyasa Board and Jem-Iyyathul Mu'allimeen. Nurturing Islamic character, moral discipline, and intellectual leadership across thousands of madrassas.
                             </p>
 
-                            {/* Action Buttons */}
-                            <div className="d-flex flex-wrap gap-2 gap-sm-3 justify-content-center justify-content-lg-start align-items-center mb-3">
-                                <Link to="/wings" className="btn btn-hero-primary shadow-lg d-inline-flex align-items-center gap-2">
-                                    <span>Explore Our Wings</span>
+                            {/* Essential CTA Buttons Only */}
+                            <div className="d-flex flex-wrap gap-3 justify-content-center justify-content-lg-start align-items-center">
+                                <Link to="/about" className="btn btn-hero-primary shadow-lg d-inline-flex align-items-center gap-2">
+                                    <span>Our Mission</span>
                                     <i className="bi bi-arrow-right"></i>
                                 </Link>
 
-                                <Link to="/featured-events" className="btn btn-hero-outline d-inline-flex align-items-center gap-2">
-                                    <i className="bi bi-plus-circle"></i>
-                                    <span>Add Unit Activity</span>
+                                <Link to="/contact" className="btn btn-hero-outline d-inline-flex align-items-center gap-2">
+                                    <i className="bi bi-envelope"></i>
+                                    <span>Contact Us</span>
                                 </Link>
-
-                                <Link to="/gallery" className="btn btn-hero-glass d-inline-flex align-items-center gap-2">
-                                    <i className="bi bi-images"></i>
-                                    <span>Gallery</span>
-                                </Link>
-                            </div>
-
-                            {/* Scene Controls */}
-                            <div className="d-flex align-items-center justify-content-center justify-content-lg-start gap-2 mt-2">
-                                <div className="slide-counter-box px-3 py-1 rounded-pill bg-white-10 backdrop-blur d-inline-flex align-items-center gap-2">
-                                    <span className="small text-white-75">Scene</span>
-                                    <span className="fw-bold text-white">0{currentSlide + 1}</span>
-                                    <span className="text-white-50">/</span>
-                                    <span className="small text-white-75">0{HERO_SLIDES.length}</span>
-                                </div>
-
-                                <div className="d-flex align-items-center gap-1">
-                                    <button 
-                                        type="button" 
-                                        className="btn btn-sm btn-slide-arrow rounded-circle p-0" 
-                                        onClick={prevSlide}
-                                        aria-label="Previous background scene"
-                                    >
-                                        <i className="bi bi-chevron-left"></i>
-                                    </button>
-                                    <button 
-                                        type="button" 
-                                        className="btn btn-sm btn-slide-arrow rounded-circle p-0" 
-                                        onClick={nextSlide}
-                                        aria-label="Next background scene"
-                                    >
-                                        <i className="bi bi-chevron-right"></i>
-                                    </button>
-                                </div>
-
-                                <div className="d-flex gap-2 ms-2">
-                                    {HERO_SLIDES.map((_, i) => (
-                                        <button
-                                            key={i}
-                                            type="button"
-                                            className={`slide-indicator-dot ${currentSlide === i ? 'dot-active' : ''}`}
-                                            onClick={() => setCurrentSlide(i)}
-                                            aria-label={`Go to scene ${i + 1}`}
-                                        />
-                                    ))}
-                                </div>
                             </div>
                         </div>
                     </div>
 
-                    {/* Right Column: Glassmorphic Highlights Hub (Tighter & Compact) */}
+                    {/* Right Column: Clean Minimal Quote & Identity Card */}
                     <div className="col-lg-5" data-aos="fade-left">
-                        <div className="hero-glass-hub p-3 p-md-4 rounded-4 shadow-2xl position-relative overflow-hidden">
-                            <div className="hub-top-accent"></div>
-
-                            {/* Hub Header */}
-                            <div className="d-flex align-items-center justify-content-between mb-3">
-                                <div className="d-flex align-items-center gap-2">
-                                    <span className="hub-pulse-dot"></span>
-                                    <h4 className="h6 mb-0 text-white fw-bold text-uppercase tracking-wider" style={{ fontSize: '13px' }}>
-                                        State Highlights
-                                    </h4>
+                        <div className="hero-quote-glass p-4 rounded-4 shadow-lg position-relative overflow-hidden">
+                            <div className="quote-top-line"></div>
+                            <div className="d-flex align-items-start gap-3">
+                                <div className="quote-icon-circle flex-shrink-0 d-flex align-items-center justify-content-center rounded-circle">
+                                    <i className="bi bi-quote fs-4"></i>
                                 </div>
-                                <span className="badge px-2 py-1 rounded-pill bg-primary" style={{ fontSize: '10px' }}>
-                                    Active 2026
-                                </span>
-                            </div>
-
-                            {/* Inspiring Quote */}
-                            <div className="hub-quote-card p-2 px-3 rounded-3 mb-3">
-                                <i className="bi bi-quote text-primary fs-4 mb-0 d-block lh-1"></i>
-                                <p className="small fst-italic text-white mb-1" style={{ lineHeight: '1.5', fontSize: '13px' }}>
-                                    “Show mercy to those on the earth, and the One in the heavens will show mercy to you.”
-                                </p>
-                                <div className="d-flex align-items-center gap-2">
-                                    <div className="quote-bar"></div>
-                                    <span className="text-white-75" style={{ fontSize: '11px', fontWeight: '600' }}>
-                                        Prophet Muhammad ﷺ
-                                    </span>
-                                </div>
-                            </div>
-
-                            {/* 3 Pillar Feature Bullets */}
-                            <div className="hub-feature-list d-flex flex-column gap-2 mb-3">
-                                <div className="d-flex align-items-center gap-2">
-                                    <div className="feature-icon-pill bg-primary-subtle text-primary">
-                                        <i className="bi bi-shield-check"></i>
-                                    </div>
-                                    <div>
-                                        <div className="text-white fw-bold" style={{ fontSize: '13px' }}>Moral Discipline & Values</div>
-                                        <div className="text-white-75" style={{ fontSize: '11px' }}>Safeguarding faith & respectful student bonds</div>
+                                <div>
+                                    <p className="fst-italic text-white mb-2" style={{ fontSize: '0.96rem', lineHeight: '1.65' }}>
+                                        “Show mercy to those on the earth, and the One in the heavens will show mercy to you.”
+                                    </p>
+                                    <div className="d-flex align-items-center gap-2">
+                                        <span className="quote-author-line"></span>
+                                        <span className="text-warning fw-semibold" style={{ fontSize: '12px', letterSpacing: '0.3px' }}>
+                                            Prophet Muhammad ﷺ
+                                        </span>
                                     </div>
                                 </div>
-
-                                <div className="d-flex align-items-center gap-2">
-                                    <div className="feature-icon-pill bg-success-subtle text-success">
-                                        <i className="bi bi-laptop"></i>
-                                    </div>
-                                    <div>
-                                        <div className="text-white fw-bold" style={{ fontSize: '13px' }}>Tech Admins & Cyber Ethics</div>
-                                        <div className="text-white-75" style={{ fontSize: '11px' }}>Guiding youth toward responsible digital conduct</div>
-                                    </div>
-                                </div>
-
-                                <div className="d-flex align-items-center gap-2">
-                                    <div className="feature-icon-pill bg-warning-subtle text-warning">
-                                        <i className="bi bi-trophy"></i>
-                                    </div>
-                                    <div>
-                                        <div className="text-white fw-bold" style={{ fontSize: '13px' }}>Arts & Leadership Festivals</div>
-                                        <div className="text-white-75" style={{ fontSize: '11px' }}>State Sahithyotsav & enrichment camps</div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            {/* CTA Link */}
-                            <div className="pt-2 border-top border-white-10 text-center text-sm-start">
-                                <Link to="/featured-events" className="text-white small fw-bold text-decoration-none d-inline-flex align-items-center gap-2 hover-arrow" style={{ fontSize: '12.5px' }}>
-                                    <span>Submit your unit program report</span>
-                                    <i className="bi bi-arrow-right"></i>
-                                </Link>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                {/* Bottom Stat Counters Row (Compact) */}
-                <div className="row g-2 g-md-3 mt-2 mt-md-3 pt-1" data-aos="fade-up" data-aos-delay="150">
+                {/* Bottom Stat Counters Row */}
+                <div className="row g-2 g-md-3 mt-3 mt-md-4 pt-1" data-aos="fade-up" data-aos-delay="150">
                     {[
-                        { icon: "bi-calendar-check-fill", val: "1993", label: "Established Year", color: "#38bdf8" },
+                        { icon: "bi-calendar-check-fill", val: "1993", label: "Established Year", color: "#fbbf24" },
                         { icon: "bi-journal-bookmark-fill", val: "10,000+", label: "Active Units", color: "#34d399" },
-                        { icon: "bi-people-fill", val: "Millions", label: "Students Guided", color: "#fbbf24" },
+                        { icon: "bi-people-fill", val: "Millions", label: "Students Guided", color: "#38bdf8" },
                         { icon: "bi-geo-alt-fill", val: "14 Districts", label: "Statewide Network", color: "#f87171" }
                     ].map((stat, idx) => (
                         <div className="col-6 col-lg-3 col-md-6" key={idx}>
                             <div className="hero-stat-card p-2 px-3 p-md-3 rounded-3 h-100 transition-all hover-lift">
                                 <div className="d-flex align-items-center gap-2 gap-md-3">
-                                    <div 
+                                    <div
                                         className="stat-icon-wrap rounded-3 d-flex align-items-center justify-content-center flex-shrink-0"
                                         style={{ background: `${stat.color}25`, color: stat.color }}
                                     >
@@ -279,14 +170,14 @@ const Hero = () => {
                     transform: scale(1);
                 }
 
-                /* Reduced & Transparent Overlay so Photos are Clearly Visible */
+                /* Lightened Overlay so background images stay clear */
                 .hero-dark-overlay {
                     position: absolute;
                     inset: 0;
                     background: linear-gradient(
-                        180deg, 
-                        rgba(2, 9, 21, 0.58) 0%, 
-                        rgba(3, 12, 28, 0.42) 50%, 
+                        180deg,
+                        rgba(2, 9, 21, 0.56) 0%,
+                        rgba(3, 12, 28, 0.42) 50%,
                         rgba(2, 8, 18, 0.65) 100%
                     );
                 }
@@ -294,39 +185,40 @@ const Hero = () => {
                 .hero-mesh-accent {
                     position: absolute;
                     inset: 0;
-                    background: 
+                    background:
                         radial-gradient(at 0% 0%, rgba(13, 131, 253, 0.12) 0px, transparent 55%),
-                        radial-gradient(at 100% 100%, rgba(16, 185, 129, 0.10) 0px, transparent 50%);
+                        radial-gradient(at 100% 100%, rgba(251, 191, 36, 0.08) 0px, transparent 50%);
                     pointer-events: none;
                 }
 
-                /* Typography with subtle text shadows for clear readability */
+                /* Typography */
                 .hero-main-title {
                     font-size: clamp(2rem, 4.2vw, 3.2rem);
                     line-height: 1.15;
                     color: #ffffff;
-                    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.65);
+                    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.7);
                 }
 
-                .hero-gradient-text {
-                    background: linear-gradient(135deg, #38bdf8 0%, #60a5fa 50%, #34d399 100%);
+                .hero-highlight-text {
+                    background: linear-gradient(135deg, #fef08a 0%, #fbbf24 55%, #f59e0b 100%);
                     -webkit-background-clip: text;
                     -webkit-text-fill-color: transparent;
+                    filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.5));
                 }
 
                 .hero-top-badge {
                     background: rgba(3, 15, 34, 0.65);
                     backdrop-filter: blur(8px);
-                    border: 1px solid rgba(56, 189, 248, 0.4);
-                    color: #38bdf8;
+                    border: 1px solid rgba(251, 191, 36, 0.45);
+                    color: #fde68a;
                 }
 
                 .badge-glow-dot {
                     width: 7px;
                     height: 7px;
                     border-radius: 50%;
-                    background: #38bdf8;
-                    box-shadow: 0 0 8px #38bdf8;
+                    background: #fbbf24;
+                    box-shadow: 0 0 8px #fbbf24;
                 }
 
                 .hero-malayalam-badge {
@@ -354,7 +246,7 @@ const Hero = () => {
                     background: linear-gradient(135deg, #0d83fd 0%, #0284c7 100%);
                     color: #ffffff !important;
                     font-weight: 600;
-                    padding: 10px 24px;
+                    padding: 10px 26px;
                     border-radius: 50px;
                     border: none;
                     transition: all 0.25s ease;
@@ -367,10 +259,10 @@ const Hero = () => {
                 }
 
                 .btn-hero-outline {
-                    border: 1.5px solid rgba(255, 255, 255, 0.4);
+                    border: 1.5px solid rgba(255, 255, 255, 0.45);
                     color: #ffffff !important;
                     font-weight: 600;
-                    padding: 9px 20px;
+                    padding: 9px 22px;
                     border-radius: 50px;
                     background: rgba(3, 15, 34, 0.45);
                     backdrop-filter: blur(6px);
@@ -383,121 +275,37 @@ const Hero = () => {
                     transform: translateY(-2px);
                 }
 
-                .btn-hero-glass {
-                    border: 1.5px solid rgba(56, 189, 248, 0.4);
-                    color: #38bdf8 !important;
-                    font-weight: 600;
-                    padding: 9px 18px;
-                    border-radius: 50px;
-                    background: rgba(3, 15, 34, 0.45);
-                    backdrop-filter: blur(6px);
-                    transition: all 0.25s ease;
-                    font-size: 14px;
-                }
-                .btn-hero-glass:hover {
-                    background: #38bdf8;
-                    color: #030b18 !important;
-                    transform: translateY(-2px);
-                }
-
-                /* Slide Switchers */
-                .slide-counter-box {
-                    font-size: 12px;
-                    background: rgba(3, 15, 34, 0.6);
-                    border: 1px solid rgba(255, 255, 255, 0.2);
-                }
-
-                .btn-slide-arrow {
-                    width: 28px;
-                    height: 28px;
-                    display: inline-flex;
-                    align-items: center;
-                    justify-content: center;
-                    background: rgba(3, 15, 34, 0.6);
-                    border: 1px solid rgba(255, 255, 255, 0.2);
-                    color: #ffffff;
-                    font-size: 12px;
-                    transition: all 0.2s ease;
-                }
-                .btn-slide-arrow:hover {
-                    background: #0d83fd;
-                    border-color: #0d83fd;
-                    color: #ffffff;
-                }
-
-                .slide-indicator-dot {
-                    width: 7px;
-                    height: 7px;
-                    border-radius: 50%;
-                    border: none;
-                    background: rgba(255, 255, 255, 0.4);
-                    transition: all 0.3s ease;
-                    padding: 0;
-                }
-                .slide-indicator-dot.dot-active {
-                    width: 18px;
-                    border-radius: 8px;
-                    background: #38bdf8;
-                }
-
-                /* Right Column Glass Hub */
-                .hero-glass-hub {
-                    background: rgba(3, 15, 34, 0.55);
+                /* Minimal Quote Glass Card */
+                .hero-quote-glass {
+                    background: rgba(3, 15, 34, 0.58);
                     backdrop-filter: blur(14px);
                     -webkit-backdrop-filter: blur(14px);
                     border: 1px solid rgba(255, 255, 255, 0.16);
-                    box-shadow: 0 20px 45px -10px rgba(0, 0, 0, 0.5);
+                    box-shadow: 0 18px 40px -10px rgba(0, 0, 0, 0.45);
                 }
 
-                .hub-top-accent {
+                .quote-top-line {
                     position: absolute;
                     top: 0;
                     left: 0;
                     right: 0;
                     height: 3px;
-                    background: linear-gradient(90deg, #0d83fd, #38bdf8, #34d399);
+                    background: linear-gradient(90deg, #fbbf24, #0d83fd);
                 }
 
-                .hub-pulse-dot {
-                    width: 7px;
-                    height: 7px;
-                    border-radius: 50%;
-                    background: #34d399;
-                    box-shadow: 0 0 8px #34d399;
+                .quote-icon-circle {
+                    width: 42px;
+                    height: 42px;
+                    background: rgba(251, 191, 36, 0.18);
+                    color: #fbbf24;
+                    border: 1px solid rgba(251, 191, 36, 0.35);
                 }
 
-                .hub-quote-card {
-                    background: rgba(255, 255, 255, 0.06);
-                    border: 1px solid rgba(255, 255, 255, 0.1);
-                }
-
-                .quote-bar {
-                    width: 14px;
+                .quote-author-line {
+                    width: 18px;
                     height: 2px;
-                    background: #0d83fd;
-                }
-
-                .feature-icon-pill {
-                    width: 32px;
-                    height: 32px;
-                    border-radius: 8px;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    font-size: 15px;
-                    flex-shrink: 0;
-                }
-                .bg-primary-subtle { background: rgba(13, 131, 253, 0.25) !important; color: #38bdf8 !important; }
-                .bg-success-subtle { background: rgba(16, 185, 129, 0.25) !important; color: #34d399 !important; }
-                .bg-warning-subtle { background: rgba(245, 158, 11, 0.25) !important; color: #fbbf24 !important; }
-
-                .border-white-10 {
-                    border-color: rgba(255, 255, 255, 0.12) !important;
-                }
-
-                .hover-arrow:hover i {
-                    transform: translateX(4px);
-                    transition: transform 0.2s ease;
+                    background: #fbbf24;
+                    display: inline-block;
                 }
 
                 /* Bottom Stat Cards */
@@ -508,8 +316,8 @@ const Hero = () => {
                     border: 1px solid rgba(255, 255, 255, 0.12);
                 }
                 .hero-stat-card:hover {
-                    background: rgba(3, 15, 34, 0.7);
-                    border-color: rgba(56, 189, 248, 0.4);
+                    background: rgba(3, 15, 34, 0.72);
+                    border-color: rgba(251, 191, 36, 0.4);
                 }
 
                 .stat-icon-wrap {
@@ -540,7 +348,7 @@ const Hero = () => {
                     .hero-modern-section {
                         padding: 78px 0 25px;
                     }
-                    .btn-hero-primary, .btn-hero-outline, .btn-hero-glass {
+                    .btn-hero-primary, .btn-hero-outline {
                         width: 100%;
                         justify-content: center;
                     }
