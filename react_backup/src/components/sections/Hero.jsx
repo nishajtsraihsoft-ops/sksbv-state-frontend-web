@@ -200,7 +200,7 @@ const Hero = () => {
                 }
 
                 .hero-highlight-text {
-                    background: linear-gradient(135deg, #fef08a 0%, #fbbf24 55%, #f59e0b 100%);
+                    background: linear-gradient(135deg, #e0f2fe 0%, #7dd3fc 50%, #38bdf8 100%);
                     -webkit-background-clip: text;
                     -webkit-text-fill-color: transparent;
                     filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.5));
