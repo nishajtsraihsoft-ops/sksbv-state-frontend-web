@@ -3,80 +3,90 @@ import React from 'react';
 const AboutSection = () => {
     const pillars = [
         {
-            title: "Mission",
+            title: "Our Mission",
             icon: "bi-bullseye",
             color: "#0d83fd",
-            description: "Based on the principles of Samastha, fostering discipline, good conduct, and strong teacher-student bonds."
+            description: "Rooted in the principles of Samastha, fostering moral discipline, excellent conduct, and meaningful student-mentor bonds."
         },
         {
-            title: "Vision",
+            title: "Our Vision",
             icon: "bi-eye-fill",
             color: "#10b981",
-            description: "Instilling religious thoughts and informing the new generation about our rich history and core values."
+            description: "Instilling authentic Islamic values while preparing students with contemporary leadership skills for a brighter future."
         },
         {
-            title: "Values",
+            title: "Core Values",
             icon: "bi-shield-heart",
             color: "#f59e0b",
-            description: "Upholding Ahlussunnah wal Jama'ah principles and honoring mentors with utmost discipline."
+            description: "Upholding Ahlussunnah wal Jama'ah ideals, mutual respect, communal harmony, and educational excellence."
         }
     ];
 
     return (
-        <section id="about" className="about-section py-4 py-md-5 position-relative overflow-hidden">
-            {/* Background Decorations */}
+        <section id="about" className="about-section py-5 position-relative overflow-hidden">
+            {/* Ambient Background Glows */}
             <div className="about-bg-blob blob-1"></div>
             <div className="about-bg-blob blob-2"></div>
 
-            <div className="container position-relative" data-aos="fade-up">
-                <div className="row gy-4 gy-lg-5 align-items-center">
-                    {/* Image Column */}
+            <div className="container position-relative z-1" data-aos="fade-up">
+                <div className="row gy-5 align-items-center">
+                    {/* Left Image Stack */}
                     <div className="col-lg-6" data-aos="fade-right" data-aos-delay="200">
-                        <div className="about-image-stack px-2 px-sm-0">
-                            <div className="main-img-wrapper rounded-5 shadow-2xl overflow-hidden position-relative mx-auto" style={{ maxWidth: '100%' }}>
-                                <img src={`${import.meta.env.BASE_URL}assets/img/about/about-img.jpeg`}
-                                    alt="SKSBV Community"
+                        <div className="about-image-stack px-2 px-sm-0 position-relative mx-auto" style={{ maxWidth: '520px' }}>
+                            <div className="main-img-wrapper rounded-5 shadow-2xl overflow-hidden position-relative border">
+                                <img 
+                                    src="/assets/img/about/about-img.jpeg"
+                                    alt="SKSBV Community & Students"
                                     className="img-fluid w-100 object-fit-cover"
-                                    style={{ minHeight: '260px', maxHeight: '500px' }}
-                                    onError={(e) => { e.target.src = 'https://placehold.co/800x1000?text=SKSBV+Students'; }}
+                                    style={{ minHeight: '320px', maxHeight: '460px' }}
+                                    onError={(e) => { e.currentTarget.src = 'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=800&auto=format&fit=crop&q=80'; }}
                                 />
                                 <div className="img-overlay"></div>
                             </div>
-                            <div className="experience-badge d-flex align-items-center shadow-lg px-3 py-2 px-md-4 py-md-3 rounded-4 bg-white position-absolute">
-                                <span className="display-6 display-md-5 fw-bold text-primary mb-0 me-2 me-md-3">30+</span>
-                                <span className="text-uppercase fw-semibold text-muted lh-1" style={{ fontSize: '10px', letterSpacing: '1px' }}>Years of<br />Excellence</span>
+
+                            {/* Floating Experience Badge */}
+                            <div className="experience-badge d-flex align-items-center shadow-lg px-3 py-2 px-md-4 py-md-3 rounded-4 bg-white position-absolute border">
+                                <span className="display-6 fw-bold text-primary mb-0 me-2 me-md-3">30+</span>
+                                <span className="text-uppercase fw-semibold text-muted lh-1" style={{ fontSize: '11px', letterSpacing: '0.8px' }}>
+                                    Years of<br /><strong className="text-dark">Excellence</strong>
+                                </span>
                             </div>
                         </div>
                     </div>
 
-                    {/* Content Column */}
-                    <div className="col-lg-6 ps-lg-5 text-center text-lg-start" data-aos="fade-left" data-aos-delay="300">
+                    {/* Right Content Column */}
+                    <div className="col-lg-6 ps-lg-4 text-center text-lg-start" data-aos="fade-left" data-aos-delay="300">
                         <div className="about-header mb-4">
-                            <span className="badge rounded-pill px-3 py-2 fw-bold text-primary mb-3 shadow-sm d-inline-block" style={{ background: 'rgba(13, 131, 253, 0.1)', fontSize: '12px', letterSpacing: '1px' }}>
-                                ABOUT SKSBV
+                            <span className="badge-pill-modern mb-3">
+                                <span className="badge-pill-dot"></span>
+                                <span>About SKSBV</span>
                             </span>
-                            <h2 className="fw-bold mb-3 mb-md-4 responsive-h2" style={{ color: 'var(--heading-color)', letterSpacing: '-0.5px', lineHeight: '1.2' }}>
-                                Shaping the Future with <br className="d-lg-none" /> <span className="text-primary italic-style">Faith & Discipline</span>
+
+                            <h2 className="fw-bold mb-3 responsive-h2" style={{ color: 'var(--heading-color)', letterSpacing: '-0.5px' }}>
+                                Shaping Tomorrow with <span className="gradient-text-primary">Faith & Character</span>
                             </h2>
-                            <p className="text-muted mb-3 mb-md-4 px-2 px-lg-0" style={{ lineHeight: '1.6', fontSize: '15px' }}>
-                                The Samastha Kerala Sunni Bala Vedi (SKSBV) is a premier student platform under the Samastha Kerala Islam Matha Vidyabhyasa Board. Formed in 1993, we are dedicated to nurturing the next generation with religious knowledge and moral discipline.
+
+                            <p className="text-muted mb-3" style={{ fontSize: '15px', lineHeight: '1.7' }}>
+                                The <strong>Samastha Kerala Sunni Bala Vedi (SKSBV)</strong> is the apex student organization under the aegis of the Samastha Kerala Islam Matha Vidyabhyasa Board. Established in 1993, SKSBV steers millions of young minds towards moral uprightness and intellectual capability.
                             </p>
-                            <p className="text-muted mb-4 mb-md-5 px-2 px-lg-0" style={{ lineHeight: '1.6', fontSize: '15px' }}>
-                                Controlled by the Mu'allimeen Central Council, we strive to safeguard students from deviant ideologies while fostering a deep-rooted bond between mentors and students.
+                            <p className="text-muted mb-4" style={{ fontSize: '15px', lineHeight: '1.7' }}>
+                                Guided by the Jem-Iyyathul Mu'allimeen Central Council, we safeguard students from moral disorientation while building deep, respectful teacher-student camaraderie.
                             </p>
                         </div>
 
-                        {/* Pillars Grid */}
+                        {/* 3 Pillars Grid */}
                         <div className="row g-3 justify-content-center justify-content-lg-start">
                             {pillars.map((pillar, idx) => (
-                                <div className="col-12 col-sm-6 col-md-4" key={idx}>
-                                    <div className="pillar-card p-3 h-100 rounded-4 shadow-sm border-0 transition-all hover-lift mx-auto" style={{ maxWidth: '280px' }}>
-                                        <div className="pillar-icon mb-3 d-flex align-items-center justify-content-center rounded-3 shadow-sm mx-auto mx-lg-0"
-                                            style={{ width: '40px', height: '40px', background: `${pillar.color}15`, color: pillar.color, fontSize: '18px' }}>
+                                <div className="col-12 col-sm-4" key={idx}>
+                                    <div className="pillar-card p-3 p-md-4 h-100 rounded-4 shadow-sm border bg-white transition-all hover-lift text-start">
+                                        <div 
+                                            className="pillar-icon mb-3 d-flex align-items-center justify-content-center rounded-3 shadow-sm"
+                                            style={{ width: '44px', height: '44px', background: `${pillar.color}15`, color: pillar.color, fontSize: '20px' }}
+                                        >
                                             <i className={`bi ${pillar.icon}`}></i>
                                         </div>
-                                        <h4 className="fw-bold mb-2" style={{ color: 'var(--heading-color)', fontSize: '0.95rem' }}>{pillar.title}</h4>
-                                        <p className="mb-0 text-muted" style={{ fontSize: '12.5px', lineHeight: '1.45' }}>{pillar.description}</p>
+                                        <h4 className="fw-bold mb-1" style={{ color: 'var(--heading-color)', fontSize: '0.98rem' }}>{pillar.title}</h4>
+                                        <p className="mb-0 text-muted" style={{ fontSize: '12.5px', lineHeight: '1.5' }}>{pillar.description}</p>
                                     </div>
                                 </div>
                             ))}
@@ -95,77 +105,29 @@ const AboutSection = () => {
                     filter: blur(80px);
                     opacity: 0.12;
                     z-index: 0;
+                    pointer-events: none;
                 }
-                .blob-1 { width: 400px; height: 400px; background: #0d83fd; top: -10%; left: -5%; }
-                .blob-2 { width: 300px; height: 300px; background: #10b981; bottom: 5%; right: -5%; }
-                
-                .about-image-stack {
-                    position: relative;
-                }
+                .blob-1 { width: 380px; height: 380px; background: #0d83fd; top: -5%; left: -5%; }
+                .blob-2 { width: 320px; height: 320px; background: #10b981; bottom: 5%; right: -5%; }
                 .main-img-wrapper {
-                   border: 1px solid rgba(0,0,0,0.05);
-                   transition: transform 0.3s ease;
-                }
-                .main-img-wrapper:hover {
-                    transform: scale(1.02);
+                    border: 4px solid #ffffff !important;
                 }
                 .img-overlay {
                     position: absolute;
                     inset: 0;
-                    background: linear-gradient(to top, rgba(0,0,0,0.2), transparent);
+                    background: linear-gradient(180deg, transparent 60%, rgba(1, 41, 112, 0.4) 100%);
                 }
                 .experience-badge {
-                    bottom: 20px;
-                    right: 0;
-                    z-index: 2;
-                    border: 1px solid rgba(0,0,0,0.05);
-                    transform: translateX(10px);
-                }
-                .italic-style {
-                    font-style: italic;
-                    opacity: 0.9;
+                    bottom: -20px;
+                    right: 15px;
+                    z-index: 3;
+                    border: 1px solid rgba(0, 0, 0, 0.06);
                 }
                 .pillar-card {
-                    background: rgba(255, 255, 255, 0.85);
-                    backdrop-filter: blur(8px);
-                    -webkit-backdrop-filter: blur(8px);
-                    border: 1px solid rgba(0, 0, 0, 0.04) !important;
+                    border: 1px solid rgba(0, 0, 0, 0.05) !important;
                 }
-                .hover-lift {
-                    transition: transform 0.3s ease, box-shadow 0.3s ease;
-                }
-                .hover-lift:hover {
-                    transform: translateY(-6px);
-                    box-shadow: 0 15px 30px rgba(0,0,0,0.06) !important;
-                    background: #ffffff;
-                }
-                .shadow-2xl {
-                    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
-                }
-
-                @media (max-width: 991px) {
-                    .ps-lg-5 { padding-left: 0 !important; }
-                    .about-image-stack { margin-bottom: 50px; }
-                    .experience-badge { bottom: -20px; right: 50%; transform: translateX(50%); width: max-content; }
-                }
-                
-                @media (max-width: 575px) {
-                    .experience-badge { 
-                        position: relative !important; 
-                        bottom: auto !important; 
-                        right: auto !important; 
-                        transform: none !important; 
-                        margin: 16px auto 0 !important; 
-                        display: inline-flex !important; 
-                        box-shadow: 0 8px 20px rgba(0,0,0,0.08) !important;
-                    }
-                    .about-image-stack {
-                        text-align: center;
-                        margin-bottom: 30px !important;
-                    }
-                    .about-header h2 { font-size: clamp(1.4rem, 5.5vw, 1.85rem) !important; }
-                    .pillar-card { text-align: center; }
-                    .pillar-icon { margin-left: auto; margin-right: auto; }
+                .pillar-card:hover {
+                    border-color: rgba(13, 131, 253, 0.25) !important;
                 }
             `}</style>
         </section>

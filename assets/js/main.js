@@ -252,10 +252,71 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    /**
+     * HOME PAGE GALLERY PREVIEW
+     */
+    const homeGalleryContainer = document.getElementById('home-gallery-container');
+    async function initHomeGallery() {
+        if (!homeGalleryContainer) return;
+
+        const defaultGallery = [
+            { title: 'State Conference', image: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&auto=format&fit=crop&q=80', tag: 'Conference' },
+            { title: 'Leadership Summit', image: 'https://images.unsplash.com/photo-1511578314322-379afb476865?w=800&auto=format&fit=crop&q=80', tag: 'Leadership' },
+            { title: 'Student Excellence Meet', image: 'https://images.unsplash.com/photo-1523580494863-6f3031224c94?w=800&auto=format&fit=crop&q=80', tag: 'Students' },
+            { title: 'Educational Seminar', image: 'https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=800&auto=format&fit=crop&q=80', tag: 'Education' },
+            { title: 'Cultural & Arts Fest', image: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=800&auto=format&fit=crop&q=80', tag: 'Culture' },
+            { title: 'Annual State Gathering', image: 'https://images.unsplash.com/photo-1528605248644-14dd04022da1?w=800&auto=format&fit=crop&q=80', tag: 'Gathering' }
+        ];
+
+        let images = [];
+        try {
+            const data = await fetchData('/api/gallery');
+            if (data && typeof data === 'object') {
+                const list = Array.isArray(data) ? data : (data.results || data.images || []);
+                if (list.length > 0) {
+                    images = list.slice(0, 6);
+                }
+            }
+        } catch (e) {
+            console.error('Failed to load gallery preview:', e);
+        }
+
+        if (images.length === 0) images = defaultGallery;
+
+        let html = '';
+        images.forEach((item, index) => {
+            const rawSrc = typeof item === 'string' ? item : (item.image || item.url || '');
+            const imgUrl = rawSrc.startsWith('http') || rawSrc.startsWith('/') ? rawSrc : buildApiUrl(rawSrc);
+            const title = item.title && item.title !== '1' ? item.title : `SKSBV Event Moment #${index + 1}`;
+            const tag = item.tag || 'SKSBV State';
+
+            html += `
+            <div class="col-lg-4 col-md-6 col-12" data-aos="fade-up" data-aos-delay="${index * 80}">
+                <a href="${imgUrl}" class="glightbox gallery-card d-block rounded-4 overflow-hidden position-relative shadow-sm text-decoration-none" data-gallery="home-gallery">
+                    <div class="gallery-img-wrapper">
+                        <img src="${imgUrl}" alt="Gallery photo ${index + 1}" class="img-fluid w-100 h-100 gallery-img" loading="lazy" onerror="this.src='${defaultGallery[index % defaultGallery.length].image}'">
+                    </div>
+                    <div class="gallery-card-overlay d-flex align-items-center justify-content-center">
+                        <div class="zoom-circle-btn shadow-lg">
+                            <i class="bi bi-arrows-fullscreen"></i>
+                        </div>
+                    </div>
+                </a>
+            </div>`;
+        });
+
+        homeGalleryContainer.innerHTML = html;
+
+        if (window.GLightbox) {
+            GLightbox({ selector: '.glightbox' });
+        }
+    }
+
     // --- RUN EVERY PAGE INIT ---
     initNotifications();
     initCirculars();
     initGallery();
+    initHomeGallery();
     initLeaders();
 
 });

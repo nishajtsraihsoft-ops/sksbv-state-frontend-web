@@ -42,7 +42,7 @@ const AdminDashboard = () => {
       {/* Tabs Navigation */}
       <div className="bg-white border-bottom" style={{ borderRadius: '0' }}>
         <div className="container-fluid">
-          <div className="nav nav-tabs" role="tablist" style={{ borderBottom: '2px solid #e9ecef', padding: '0 2rem' }}>
+          <div className="nav nav-tabs flex-nowrap overflow-x-auto text-nowrap" role="tablist" style={{ borderBottom: '2px solid #e9ecef', padding: '0 1rem' }}>
             {RESOURCES.map((r, idx) => (
               <button
                 key={r.key}
