@@ -218,27 +218,24 @@ h6 {
 
 @media (max-width: 1200px) {
   .header {
-    padding-top: 10px;
+    padding: 10px 0;
   }
 
   .header .header-container {
-    margin-left: 10px;
-    margin-right: 10px;
-    padding: 10px 5px 10px 15px;
+    width: 100%;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
   }
 
   .header .logo {
-    order: 1;
+    order: 1 !important;
+    margin-right: auto !important;
   }
 
-  .header .btn-getstarted {
-    order: 2;
-    margin: 0 10px 0 0;
-    padding: 6px 15px;
-  }
-
-  .header .navmenu {
-    order: 3;
+  .mobile-nav-toggle-btn {
+    order: 10 !important;
+    margin-left: auto !important;
   }
 }
 

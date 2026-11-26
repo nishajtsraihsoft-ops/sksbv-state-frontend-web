@@ -158,13 +158,14 @@ const Header = () => {
             )}
           </div>
 
-          {/* Creative Animated Mobile Toggle Button (Right Side) */}
+          {/* Creative Animated Mobile Toggle Button (Guaranteed Far Right Side of Header) */}
           <button
             type="button"
-            className={`mobile-nav-toggle-btn d-xl-none ${isMobileNavOpen ? 'active' : ''}`}
+            className={`mobile-nav-toggle-btn d-xl-none ms-auto ${isMobileNavOpen ? 'active' : ''}`}
             onClick={toggleMobileNav}
             aria-label="Toggle navigation menu"
             aria-expanded={isMobileNavOpen}
+            style={{ order: 10, marginLeft: 'auto' }}
           >
             <span className="hamburger-box">
               <span className="hamburger-line line-1"></span>
@@ -409,8 +410,10 @@ const Header = () => {
           box-shadow: 0 8px 20px rgba(13, 131, 253, 0.3);
         }
 
-        /* --- Creative Animated Hamburger Toggle --- */
+        /* --- Creative Animated Hamburger Toggle (Right Side) --- */
         .mobile-nav-toggle-btn {
+          order: 10 !important;
+          margin-left: auto !important;
           width: 42px;
           height: 42px;
           border-radius: 12px;
