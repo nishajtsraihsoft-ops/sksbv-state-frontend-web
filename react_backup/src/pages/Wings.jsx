@@ -72,7 +72,7 @@ const Wings = () => {
                                     {/* Top Color Accent Line */}
                                     <div className="wing-top-bar" style={{ background: wing.gradient }}></div>
 
-                                    <div className="d-flex flex-column flex-sm-row align-items-center align-items-sm-start text-center text-sm-start mb-4">
+                                    <div className="d-flex flex-column flex-sm-row align-items-center text-center text-sm-start mb-4">
                                         <div 
                                             className="wing-img-wrapper rounded-circle shadow-sm me-sm-4 mb-3 mb-sm-0 d-flex align-items-center justify-content-center overflow-hidden flex-shrink-0"
                                             style={{ 
@@ -93,22 +93,13 @@ const Wings = () => {
                                         </div>
 
                                         <div className="flex-grow-1">
-                                            <div className="d-flex flex-wrap align-items-center justify-content-center justify-content-sm-start gap-2 mb-2">
+                                            <div className="d-flex flex-wrap align-items-center justify-content-center justify-content-sm-start gap-2">
                                                 <h3 className="mb-0 fw-bold" style={{ color: 'var(--heading-color)', fontSize: '1.65rem' }}>
                                                     {wing.title}
                                                 </h3>
                                                 <span className="badge px-3 py-1 rounded-pill shadow-xs fw-bold" style={{ background: wing.gradient, color: '#fff', fontSize: '11px' }}>
                                                     {wing.subtitle}
                                                 </span>
-                                            </div>
-
-                                            {/* Tag Badges */}
-                                            <div className="d-flex flex-wrap justify-content-center justify-content-sm-start gap-1">
-                                                {wing.tags.map((tag, tidx) => (
-                                                    <span key={tidx} className="badge bg-light text-secondary border small fw-medium">
-                                                        #{tag}
-                                                    </span>
-                                                ))}
                                             </div>
                                         </div>
                                     </div>
