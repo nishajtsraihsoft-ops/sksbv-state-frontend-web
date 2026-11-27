@@ -89,19 +89,19 @@ const Hero = () => {
                         </div>
                     </div>
 
-                    {/* Right Column: Clean Minimal Quote & Identity Card (Hidden on mobile screens) */}
-                    <div className="col-lg-5 d-none d-md-block" data-aos="fade-left">
-                        <div className="hero-quote-glass p-4 rounded-4 shadow-lg position-relative overflow-hidden">
+                    {/* Right Column: Quote Card (Glass box removed on mobile, text preserved) */}
+                    <div className="col-lg-5" data-aos="fade-left">
+                        <div className="hero-quote-glass p-4 rounded-4 shadow-lg position-relative overflow-hidden text-center text-md-start">
                             <div className="quote-top-line"></div>
-                            <div className="d-flex align-items-start gap-3">
-                                <div className="quote-icon-circle flex-shrink-0 d-flex align-items-center justify-content-center rounded-circle">
+                            <div className="d-flex align-items-start justify-content-center justify-content-md-start gap-3">
+                                <div className="quote-icon-circle flex-shrink-0 d-none d-md-flex align-items-center justify-content-center rounded-circle">
                                     <i className="bi bi-quote fs-4"></i>
                                 </div>
                                 <div>
-                                    <p className="fst-italic text-white mb-2" style={{ fontSize: '0.96rem', lineHeight: '1.65' }}>
+                                    <p className="fst-italic text-white mb-2 hero-quote-text" style={{ fontSize: '0.96rem', lineHeight: '1.65' }}>
                                         “Show mercy to those on the earth, and the One in the heavens will show mercy to you.”
                                     </p>
-                                    <div className="d-flex align-items-center gap-2">
+                                    <div className="d-flex align-items-center justify-content-center justify-content-md-start gap-2">
                                         <span className="quote-author-line"></span>
                                         <span className="text-warning fw-semibold" style={{ fontSize: '12px', letterSpacing: '0.3px' }}>
                                             Prophet Muhammad ﷺ
@@ -334,12 +334,26 @@ const Hero = () => {
                     font-size: clamp(1.1rem, 1.8vw + 0.3rem, 1.35rem);
                 }
 
-                @media (max-width: 768px) {
+                @media (max-width: 767px) {
                     .hero-modern-section {
                         padding: 95px 0 30px;
                     }
                     .hero-main-title {
                         font-size: clamp(1.8rem, 6.5vw, 2.3rem);
+                    }
+                    .hero-quote-glass {
+                        background: transparent !important;
+                        backdrop-filter: none !important;
+                        -webkit-backdrop-filter: none !important;
+                        border: none !important;
+                        box-shadow: none !important;
+                        padding: 0 !important;
+                    }
+                    .quote-top-line {
+                        display: none !important;
+                    }
+                    .hero-quote-text {
+                        text-shadow: 0 1px 8px rgba(0, 0, 0, 0.8);
                     }
                     .stat-icon-wrap {
                         width: 32px;
