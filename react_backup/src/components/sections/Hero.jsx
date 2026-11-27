@@ -62,15 +62,15 @@ const Hero = () => {
                                 <span className="hero-highlight-text">Sunni Bala Vedi</span>
                             </h1>
 
-                            {/* Malayalam Subtitle Pill */}
-                            <div className="mb-3 d-inline-block">
+                            {/* Malayalam Subtitle Pill (Hidden on mobile screens) */}
+                            <div className="mb-3 d-none d-md-inline-block">
                                 <span className="hero-malayalam-badge px-3 py-1 rounded-pill">
                                     സമസ്ത കേരള സുന്നീ ബാല വേദി (സംസ്ഥാന കമ്മറ്റി)
                                 </span>
                             </div>
 
-                            {/* Mission Narrative */}
-                            <p className="hero-lead-text text-white mb-2 mb-md-4 mx-auto mx-lg-0">
+                            {/* Mission Narrative (Hidden on mobile screens) */}
+                            <p className="hero-lead-text text-white mb-2 mb-md-4 mx-auto mx-lg-0 d-none d-md-block">
                                 The premier student wing under the aegis of the Samastha Kerala Islam Matha Vidyabhyasa Board and Jem-Iyyathul Mu'allimeen. Nurturing Islamic character, moral discipline, and intellectual leadership across thousands of madrassas.
                             </p>
 
@@ -89,8 +89,8 @@ const Hero = () => {
                         </div>
                     </div>
 
-                    {/* Right Column: Clean Minimal Quote & Identity Card */}
-                    <div className="col-lg-5" data-aos="fade-left">
+                    {/* Right Column: Clean Minimal Quote & Identity Card (Hidden on mobile screens) */}
+                    <div className="col-lg-5 d-none d-md-block" data-aos="fade-left">
                         <div className="hero-quote-glass p-4 rounded-4 shadow-lg position-relative overflow-hidden">
                             <div className="quote-top-line"></div>
                             <div className="d-flex align-items-start gap-3">
