@@ -322,7 +322,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
 
                 html += `
-                <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="col-6 col-md-4 col-lg-3">
                     <div class="leader-card text-center">
                         <p class="leader-role">${leader.designation || 'Leader'}</p>
                         <div class="leader-image">

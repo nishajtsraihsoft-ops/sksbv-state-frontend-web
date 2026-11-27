@@ -33,7 +33,7 @@ const Leaders = () => {
 
   return (
     <main className="main">
-      <PageTitle title="Leadership Council" current="Leaders" />
+      <PageTitle title="Our Leaders" current="Leaders" />
 
       {/* Tabs & Search Controls */}
       <section className="py-4 leaders-control-bar border-bottom">
@@ -44,24 +44,24 @@ const Leaders = () => {
               <div className="nav-scroll-wrapper">
                 <ul className="nav nav-pills custom-nav-pills gap-2 flex-nowrap">
                   <li className="nav-item">
-                    <button 
-                      className={`nav-link rounded-pill px-4 py-2 ${activeTab === 'state' ? 'active' : ''}`}
+                    <button
+                      className={`nav-link rounded-pill px-3 px-sm-4 py-2 ${activeTab === 'state' ? 'active' : ''}`}
                       onClick={() => setActiveTab('state')}
                     >
                       <i className="bi bi-star-fill me-2 small"></i>State Leaders
                     </button>
                   </li>
                   <li className="nav-item">
-                    <button 
-                      className={`nav-link rounded-pill px-4 py-2 ${activeTab === 'working' ? 'active' : ''}`}
+                    <button
+                      className={`nav-link rounded-pill px-3 px-sm-4 py-2 ${activeTab === 'working' ? 'active' : ''}`}
                       onClick={() => setActiveTab('working')}
                     >
                       <i className="bi bi-diagram-3-fill me-2 small"></i>Working Committee
                     </button>
                   </li>
                   <li className="nav-item">
-                    <button 
-                      className={`nav-link rounded-pill px-4 py-2 ${activeTab === 'district' ? 'active' : ''}`}
+                    <button
+                      className={`nav-link rounded-pill px-3 px-sm-4 py-2 ${activeTab === 'district' ? 'active' : ''}`}
                       onClick={() => setActiveTab('district')}
                     >
                       <i className="bi bi-geo-alt-fill me-2 small"></i>District Leaders
@@ -95,16 +95,16 @@ const Leaders = () => {
         </div>
       </section>
 
-      {/* Leaders Display Grid */}
+      {/* Leaders Display Grid (Old Card Design + Mobile Responsive) */}
       <section id="leaders" className="leaders-section py-5">
         <div className="container">
           {loading ? (
-            <div className="row g-4">
+            <div className="row g-3 g-sm-4">
               {[1, 2, 3, 4, 5, 6, 7, 8].map((n) => (
                 <div className="col-6 col-md-4 col-lg-3" key={n}>
                   <div className="leader-skeleton-card p-4 rounded-4 shadow-sm text-center">
+                    <div className="skeleton-bar w-50 mx-auto mb-3"></div>
                     <div className="skeleton-circle mx-auto mb-3"></div>
-                    <div className="skeleton-bar w-50 mx-auto mb-2"></div>
                     <div className="skeleton-bar w-75 mx-auto"></div>
                   </div>
                 </div>
@@ -125,36 +125,35 @@ const Leaders = () => {
               <p className="text-muted small">Try searching with a different name or designation.</p>
             </div>
           ) : (
-            <div className="row g-3 g-md-4">
+            <div className="row g-3 g-sm-4">
               {filteredLeaders.map((leader, index) => {
                 const imgUrl = leader.image || leader.url || leader.photo || '';
                 return (
                   <div className="col-6 col-md-4 col-lg-3" key={index} data-aos="fade-up" data-aos-delay={(index % 4) * 60}>
-                    <div className="leader-card p-3 p-md-4 rounded-4 shadow-sm border bg-white text-center h-100 transition-all hover-lift d-flex flex-column align-items-center justify-content-between">
-                      {/* Image Frame */}
-                      <div className="leader-img-frame mb-3 position-relative">
+                    <div className="leader-card text-center">
+                      {/* Designation */}
+                      <p className="leader-role">
+                        {leader.designation || 'Leader'}
+                      </p>
+
+                      {/* Image */}
+                      <div className="leader-image">
                         <img
                           src={imgUrl}
                           alt={leader.name}
-                          className="rounded-circle img-fluid leader-avatar shadow-sm"
                           loading="lazy"
                           onError={(e) => {
-                            e.currentTarget.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(leader.name || 'Leader')}&background=0d83fd&color=fff&size=200`;
+                            e.currentTarget.src =
+                              'https://placehold.co/400x400?text=' +
+                              encodeURIComponent(leader.name ? leader.name.split(' ')[0] : 'Leader');
                           }}
                         />
                       </div>
 
-                      {/* Info */}
-                      <div className="leader-meta w-100">
-                        {leader.designation && (
-                          <span className="badge rounded-pill bg-primary-subtle text-primary border border-primary-subtle px-3 py-1 mb-2 fw-semibold text-truncate d-inline-block mw-100" style={{ fontSize: '11px' }}>
-                            {leader.designation}
-                          </span>
-                        )}
-                        <h5 className="leader-name mb-0 fw-bold" style={{ color: 'var(--heading-color)', fontSize: '1.025rem' }}>
-                          {leader.name}
-                        </h5>
-                      </div>
+                      {/* Name */}
+                      <h5 className="leader-name">
+                        {leader.name}
+                      </h5>
                     </div>
                   </div>
                 );
@@ -166,7 +165,7 @@ const Leaders = () => {
 
       <style>{`
         .leaders-control-bar {
-          background: #f8fafc;
+          background: #f9fafb;
         }
         .custom-nav-pills .nav-link {
           background: #ffffff;
@@ -178,15 +177,16 @@ const Leaders = () => {
           transition: all 0.25s ease;
         }
         .custom-nav-pills .nav-link.active {
-          background: var(--accent-color, #0d83fd) !important;
+          background: var(--accent-color, #0d6efd) !important;
           color: #ffffff !important;
-          border-color: var(--accent-color, #0d83fd) !important;
-          box-shadow: 0 4px 12px rgba(13, 131, 253, 0.25);
+          border-color: var(--accent-color, #0d6efd) !important;
+          box-shadow: 0 4px 12px rgba(13, 110, 253, 0.25);
         }
         .nav-scroll-wrapper {
           overflow-x: auto;
           -webkit-overflow-scrolling: touch;
           scrollbar-width: none;
+          padding-bottom: 4px;
         }
         .nav-scroll-wrapper::-webkit-scrollbar {
           display: none;
@@ -198,37 +198,108 @@ const Leaders = () => {
         .search-input-box .input-group-text {
           border-radius: 50px 0 0 50px;
         }
+
+        .leaders-section {
+          background: #f9fafb;
+        }
+
+        /* Old Leader Card Design */
         .leader-card {
-          border: 1px solid rgba(0, 0, 0, 0.06) !important;
+          background: #ffffff;
+          padding: 30px 20px;
+          border-radius: 16px;
+          box-shadow: 0 6px 25px rgba(0, 0, 0, 0.05);
+          transition: all 0.3s ease;
+          height: 100%;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
         }
-        .leader-img-frame {
-          width: 110px;
-          height: 110px;
+
+        .leader-card:hover {
+          transform: translateY(-6px);
+          box-shadow: 0 12px 35px rgba(0, 0, 0, 0.08);
+        }
+
+        .leader-role {
+          font-size: 13px;
+          font-weight: 600;
+          color: #0d6efd;
+          margin-bottom: 18px;
+          letter-spacing: 0.3px;
+          min-height: 36px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .leader-image {
+          width: 140px;
+          height: 140px;
+          margin: 0 auto 18px auto;
           border-radius: 50%;
-          padding: 4px;
-          background: linear-gradient(135deg, rgba(13, 131, 253, 0.2) 0%, rgba(16, 185, 129, 0.2) 100%);
+          overflow: hidden;
+          box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+          transition: 0.3s ease;
+          flex-shrink: 0;
         }
-        .leader-avatar {
+
+        .leader-card:hover .leader-image {
+          transform: scale(1.05);
+        }
+
+        .leader-image img {
           width: 100%;
           height: 100%;
           object-fit: cover;
         }
-        @media (max-width: 576px) {
-          .leader-img-frame {
-            width: 85px;
-            height: 85px;
-          }
-          .leader-name {
-            font-size: 0.9rem !important;
+
+        .leader-name {
+          font-size: 16px;
+          font-weight: 600;
+          margin: 0;
+          color: #333333;
+          line-height: 1.4;
+        }
+
+        @media (max-width: 768px) {
+          .leader-image {
+            width: 110px;
+            height: 110px;
           }
         }
+
+        @media (max-width: 575px) {
+          .leader-card {
+            padding: 18px 10px;
+            border-radius: 14px;
+          }
+          .leader-role {
+            font-size: 11px;
+            margin-bottom: 12px;
+            min-height: 30px;
+          }
+          .leader-image {
+            width: 88px;
+            height: 88px;
+            margin-bottom: 12px;
+          }
+          .leader-name {
+            font-size: 13.5px;
+          }
+          .custom-nav-pills .nav-link {
+            font-size: 12.5px;
+            padding: 7px 14px !important;
+          }
+        }
+
         .leader-skeleton-card {
           background: #ffffff;
           border: 1px solid rgba(0, 0, 0, 0.05);
         }
         .skeleton-circle {
-          width: 90px;
-          height: 90px;
+          width: 110px;
+          height: 110px;
           border-radius: 50%;
           background: #e2e8f0;
         }

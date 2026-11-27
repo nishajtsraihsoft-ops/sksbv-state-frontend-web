@@ -439,27 +439,79 @@
           border-radius: 50px 0 0 50px;
         }
         .leader-card {
-          border: 1px solid rgba(0, 0, 0, 0.06) !important;
+          background: #ffffff;
+          padding: 30px 20px;
+          border-radius: 16px;
+          box-shadow: 0 6px 25px rgba(0, 0, 0, 0.05);
+          transition: all 0.3s ease;
+          height: 100%;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
         }
-        .leader-img-frame {
-          width: 110px;
-          height: 110px;
+        .leader-card:hover {
+          transform: translateY(-6px);
+          box-shadow: 0 12px 35px rgba(0, 0, 0, 0.08);
+        }
+        .leader-role {
+          font-size: 13px;
+          font-weight: 600;
+          color: #0d6efd;
+          margin-bottom: 18px;
+          letter-spacing: 0.3px;
+          min-height: 36px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+        .leader-image {
+          width: 140px;
+          height: 140px;
+          margin: 0 auto 18px auto;
           border-radius: 50%;
-          padding: 4px;
-          background: linear-gradient(135deg, rgba(13, 131, 253, 0.2) 0%, rgba(16, 185, 129, 0.2) 100%);
+          overflow: hidden;
+          box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+          transition: 0.3s ease;
+          flex-shrink: 0;
         }
-        .leader-avatar {
+        .leader-card:hover .leader-image {
+          transform: scale(1.05);
+        }
+        .leader-image img {
           width: 100%;
           height: 100%;
           object-fit: cover;
         }
-        @media (max-width: 576px) {
-          .leader-img-frame {
-            width: 85px;
-            height: 85px;
+        .leader-name {
+          font-size: 16px;
+          font-weight: 600;
+          margin: 0;
+          color: #333333;
+          line-height: 1.4;
+        }
+        @media (max-width: 768px) {
+          .leader-image {
+            width: 110px;
+            height: 110px;
+          }
+        }
+        @media (max-width: 575px) {
+          .leader-card {
+            padding: 18px 10px;
+            border-radius: 14px;
+          }
+          .leader-role {
+            font-size: 11px;
+            margin-bottom: 12px;
+            min-height: 30px;
+          }
+          .leader-image {
+            width: 88px;
+            height: 88px;
+            margin-bottom: 12px;
           }
           .leader-name {
-            font-size: 0.9rem !important;
+            font-size: 13.5px;
           }
         }
         .leader-skeleton-card {
