@@ -44,10 +44,10 @@ const ValuesSection = () => {
                     </p>
                 </div>
 
-                <div className="row g-3 g-md-4 justify-content-center">
+                <div className="row g-2 g-sm-3 g-md-4 justify-content-center">
                     {values.map((val, idx) => (
-                        <div className="col-12 col-sm-6 col-lg-3" key={idx} data-aos="fade-up" data-aos-delay={80 * (idx + 1)}>
-                            <div className="value-card h-100 p-4 rounded-4 shadow-sm border bg-white transition-all text-center d-flex flex-column align-items-center">
+                        <div className="col-6 col-lg-3" key={idx} data-aos="fade-up" data-aos-delay={80 * (idx + 1)}>
+                            <div className="value-card h-100 p-3 p-sm-4 rounded-4 shadow-sm border bg-white transition-all text-center d-flex flex-column align-items-center">
                                 <div 
                                     className="value-icon mb-3 d-flex align-items-center justify-content-center rounded-circle"
                                     style={{ width: '56px', height: '56px', background: `${val.color}15`, color: val.color }}
