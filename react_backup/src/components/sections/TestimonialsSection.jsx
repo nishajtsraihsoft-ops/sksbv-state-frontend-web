@@ -58,13 +58,13 @@ const TestimonialsSection = () => {
                         spaceBetween={24}
                         slidesPerView={1}
                         loop={true}
-                        speed={700}
+                        speed={5000}
                         breakpoints={{
                             768: { slidesPerView: 2 },
                             1024: { slidesPerView: 2 }
                         }}
                         autoplay={{
-                            delay: 3000,
+                            delay: 0,
                             disableOnInteraction: false,
                             pauseOnMouseEnter: true,
                         }}
@@ -111,6 +111,9 @@ const TestimonialsSection = () => {
             <style>{`
                 .testimonials-redesign {
                     background: #ffffff;
+                }
+                .testimonials-slider .swiper-wrapper {
+                    transition-timing-function: linear !important;
                 }
                 .testimonial-card {
                     border: 1px solid rgba(0, 0, 0, 0.05) !important;

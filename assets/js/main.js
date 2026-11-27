@@ -462,7 +462,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (testimonialsEl && window.Swiper) {
         new window.Swiper(testimonialsEl, {
             loop: true,
-            speed: 700,
+            speed: 5000,
             spaceBetween: 24,
             slidesPerView: 1,
             breakpoints: {
@@ -470,7 +470,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 1024: { slidesPerView: 2 }
             },
             autoplay: {
-                delay: 3000,
+                delay: 0,
                 disableOnInteraction: false,
                 pauseOnMouseEnter: true
             },
