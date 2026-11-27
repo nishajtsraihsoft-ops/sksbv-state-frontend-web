@@ -83,14 +83,17 @@ const LegacyOfLeadershipSection = () => {
                     modules={[Autoplay, Pagination]}
                     spaceBetween={20}
                     slidesPerView={1}
+                    loop={true}
+                    speed={5000}
                     breakpoints={{
                         640: { slidesPerView: 2 },
                         992: { slidesPerView: 3 },
                         1200: { slidesPerView: 4 }
                     }}
                     autoplay={{
-                        delay: 3500,
+                        delay: 0,
                         disableOnInteraction: false,
+                        pauseOnMouseEnter: true,
                     }}
                     pagination={{ clickable: true, dynamicBullets: true }}
                     className="legacy-slider pb-5"
@@ -134,6 +137,9 @@ const LegacyOfLeadershipSection = () => {
             </div>
 
             <style>{`
+                .legacy-slider .swiper-wrapper {
+                    transition-timing-function: linear !important;
+                }
                 .legacy-small-box {
                     transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
                 }

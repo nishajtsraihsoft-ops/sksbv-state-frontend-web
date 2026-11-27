@@ -483,6 +483,34 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     /**
+     * LEGACY OF LEADERSHIP AUTO-SLIDER
+     */
+    const legacyEl = document.querySelector('.legacy-slider');
+    if (legacyEl && window.Swiper) {
+        new window.Swiper(legacyEl, {
+            loop: true,
+            speed: 5000,
+            spaceBetween: 20,
+            slidesPerView: 1,
+            breakpoints: {
+                640: { slidesPerView: 2 },
+                992: { slidesPerView: 3 },
+                1200: { slidesPerView: 4 }
+            },
+            autoplay: {
+                delay: 0,
+                disableOnInteraction: false,
+                pauseOnMouseEnter: true
+            },
+            pagination: {
+                el: '.legacy-slider .swiper-pagination',
+                clickable: true,
+                dynamicBullets: true
+            }
+        });
+    }
+
+    /**
      * HERO BACKGROUND CAROUSEL
      */
     const heroSlides = document.querySelectorAll('.hero-bg-slide');
