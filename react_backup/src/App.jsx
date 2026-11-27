@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import { useMain } from './hooks/useMain';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import Preloader from './components/common/Preloader';
 import Home from './pages/Home';
 import About from './pages/About';
 import Leaders from './pages/Leaders';
@@ -38,6 +39,7 @@ function App() {
 
   return (
     <AuthProvider>
+      <Preloader />
       <Router>
         <ScrollToTop />
         <Header />

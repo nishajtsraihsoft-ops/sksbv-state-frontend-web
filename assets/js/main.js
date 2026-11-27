@@ -12,6 +12,40 @@ function buildApiUrl(endpoint) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+    /**
+     * SIMPLE GLOBAL PRELOADER
+     */
+    const existingPreloader = document.getElementById('site-preloader');
+    if (!existingPreloader) {
+        const preloader = document.createElement('div');
+        preloader.id = 'site-preloader';
+        preloader.style.cssText = 'position:fixed;inset:0;background:#fff;z-index:99999;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity 0.35s ease,visibility 0.35s ease;';
+        preloader.innerHTML = `
+            <div style="position:relative;width:76px;height:76px;display:flex;align-items:center;justify-content:center;margin-bottom:12px;">
+                <div style="position:absolute;inset:0;border-radius:50%;border:3px solid rgba(13,131,253,0.15);border-top-color:#0d83fd;animation:sksbvSpin 0.8s linear infinite;"></div>
+                <img src="assets/img/logo.png" alt="SKSBV Logo" style="width:42px;height:42px;object-fit:contain;">
+            </div>
+            <span style="font-family:Outfit,Inter,sans-serif;font-size:13px;font-weight:700;letter-spacing:2px;color:#012970;">SKSBV STATE</span>
+        `;
+        if (!document.getElementById('sksbv-preloader-keyframes')) {
+            const style = document.createElement('style');
+            style.id = 'sksbv-preloader-keyframes';
+            style.textContent = '@keyframes sksbvSpin{to{transform:rotate(360deg)}}';
+            document.head.appendChild(style);
+        }
+        document.body.prepend(preloader);
+        const hidePreloader = () => {
+            preloader.style.opacity = '0';
+            preloader.style.visibility = 'hidden';
+            setTimeout(() => preloader.remove(), 350);
+        };
+        if (document.readyState === 'complete') {
+            setTimeout(hidePreloader, 300);
+        } else {
+            window.addEventListener('load', () => setTimeout(hidePreloader, 300), { once: true });
+            setTimeout(hidePreloader, 1200);
+        }
+    }
 
     /**
      * Header scroll behavior (transparent over Hero on Home page)
