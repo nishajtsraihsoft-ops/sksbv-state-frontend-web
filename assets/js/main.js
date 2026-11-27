@@ -456,6 +456,33 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     /**
+     * TESTIMONIALS AUTO-SLIDER
+     */
+    const testimonialsEl = document.querySelector('.testimonials-slider');
+    if (testimonialsEl && window.Swiper) {
+        new window.Swiper(testimonialsEl, {
+            loop: true,
+            speed: 700,
+            spaceBetween: 24,
+            slidesPerView: 1,
+            breakpoints: {
+                768: { slidesPerView: 2 },
+                1024: { slidesPerView: 2 }
+            },
+            autoplay: {
+                delay: 3000,
+                disableOnInteraction: false,
+                pauseOnMouseEnter: true
+            },
+            pagination: {
+                el: '.testimonials-slider .swiper-pagination',
+                clickable: true,
+                dynamicBullets: true
+            }
+        });
+    }
+
+    /**
      * HERO BACKGROUND CAROUSEL
      */
     const heroSlides = document.querySelectorAll('.hero-bg-slide');

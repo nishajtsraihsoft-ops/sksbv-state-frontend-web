@@ -57,13 +57,16 @@ const TestimonialsSection = () => {
                         modules={[Autoplay, Pagination]}
                         spaceBetween={24}
                         slidesPerView={1}
+                        loop={true}
+                        speed={700}
                         breakpoints={{
                             768: { slidesPerView: 2 },
                             1024: { slidesPerView: 2 }
                         }}
                         autoplay={{
-                            delay: 4500,
+                            delay: 3000,
                             disableOnInteraction: false,
+                            pauseOnMouseEnter: true,
                         }}
                         pagination={{ clickable: true, dynamicBullets: true }}
                         className="testimonials-slider pb-5"
