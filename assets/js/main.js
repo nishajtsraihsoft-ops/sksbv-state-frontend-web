@@ -116,7 +116,6 @@ document.addEventListener('DOMContentLoaded', () => {
             const response = await fetch(buildApiUrl(endpoint), {
                 cache: 'no-cache',
                 headers: {
-                    'Cache-Control': 'no-cache',
                     'Accept': 'application/json'
                 }
             });
@@ -135,7 +134,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const notificationsContainer = document.getElementById('notifications-container');
 
     async function initNotifications() {
-        const data = await fetchData('/api/notifications');
+        const data = await fetchData('/api/notifications/');
         if (!data) return;
 
         const notifications = (data && typeof data === 'object') ? (Array.isArray(data) ? data : (data.results || data.notifications || [])) : [];
@@ -186,7 +185,7 @@ document.addEventListener('DOMContentLoaded', () => {
     async function initCirculars() {
         if (!circularsContainer) return;
 
-        const data = await fetchData('/api/circular');
+        const data = await fetchData('/api/circular/');
         if (!data) {
             circularsContainer.innerHTML = '<div class="text-center py-5 text-danger">Error loading circulars. API may be offline.</div>';
             return;
@@ -221,7 +220,7 @@ document.addEventListener('DOMContentLoaded', () => {
     async function initGallery() {
         if (!gallerySection && !galleryGrid) return;
 
-        const data = await fetchData('/api/gallery');
+        const data = await fetchData('/api/gallery/');
         if (!data) return;
 
         const images = (data && typeof data === 'object') ? (Array.isArray(data) ? data : (data.results || data.images || [])) : [];
@@ -274,13 +273,22 @@ document.addEventListener('DOMContentLoaded', () => {
     async function initLeaders() {
         if (!leadersSection) return;
 
-        const tabButtons = document.querySelectorAll('.custom-tabs-section button');
-        const cardsContainer = document.querySelector('#leaders .row.g-4');
+        const tabButtons = document.querySelectorAll('.leaders-control-bar button, .custom-tabs-section button');
+        let cardsContainer = document.querySelector('#leaders .row.g-4');
+        if (!cardsContainer) {
+            const container = leadersSection.querySelector('.container');
+            const emptyState = container ? container.querySelector('.text-center.py-5') : null;
+            if (emptyState) {
+                cardsContainer = document.createElement('div');
+                cardsContainer.className = 'row g-4';
+                emptyState.replaceWith(cardsContainer);
+            }
+        }
         
         const endpoints = {
-            'State Leaders': '/api/leaders',
-            'Working Committee': '/api/working-committee',
-            'District Leaders': '/api/district-leaders'
+            'State Leaders': '/api/leaders/',
+            'Working Committee': '/api/working-committee/',
+            'District Leaders': '/api/district-leaders/'
         };
 
         const renderLeaders = async (endpoint) => {
@@ -352,7 +360,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         let images = [];
         try {
-            const data = await fetchData('/api/gallery');
+            const data = await fetchData('/api/gallery/');
             if (data && typeof data === 'object') {
                 const list = Array.isArray(data) ? data : (data.results || data.images || []);
                 if (list.length > 0) {
