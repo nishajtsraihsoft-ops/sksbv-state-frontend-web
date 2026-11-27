@@ -4,15 +4,6 @@ import API from '../../api';
 import GLightbox from 'glightbox';
 import 'glightbox/dist/css/glightbox.min.css';
 
-const DEFAULT_GALLERY = [
-    { id: 1, image: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&auto=format&fit=crop&q=80' },
-    { id: 2, image: 'https://images.unsplash.com/photo-1511578314322-379afb476865?w=800&auto=format&fit=crop&q=80' },
-    { id: 3, image: 'https://images.unsplash.com/photo-1523580494863-6f3031224c94?w=800&auto=format&fit=crop&q=80' },
-    { id: 4, image: 'https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=800&auto=format&fit=crop&q=80' },
-    { id: 5, image: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=800&auto=format&fit=crop&q=80' },
-    { id: 6, image: 'https://images.unsplash.com/photo-1528605248644-14dd04022da1?w=800&auto=format&fit=crop&q=80' }
-];
-
 const GallerySection = () => {
     const [images, setImages] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -28,14 +19,10 @@ const GallerySection = () => {
             .then(data => {
                 if (!isMounted) return;
                 const list = Array.isArray(data) ? data : (data.results || []);
-                if (list.length > 0) {
-                    setImages(list.slice(0, 6));
-                } else {
-                    setImages(DEFAULT_GALLERY);
-                }
+                setImages(list.slice(0, 6));
             })
             .catch(() => {
-                if (isMounted) setImages(DEFAULT_GALLERY);
+                if (isMounted) setImages([]);
             })
             .finally(() => {
                 if (isMounted) setLoading(false);
@@ -59,8 +46,6 @@ const GallerySection = () => {
         };
     }, [images]);
 
-    const displayList = images.length > 0 ? images : DEFAULT_GALLERY;
-
     return (
         <section id="gallery-preview" className="home-gallery-section section py-5 position-relative overflow-hidden">
             {/* Background decorative glow */}
@@ -68,9 +53,9 @@ const GallerySection = () => {
 
             <div className="container position-relative z-1" data-aos="fade-up">
                 {/* Header */}
-                <div className="d-flex flex-column flex-md-row justify-content-between align-items-md-end mb-4 mb-md-5">
+                <div className="d-flex flex-column flex-md-row justify-content-between align-items-center align-items-md-end text-center text-md-start mb-4 mb-md-5">
                     <div>
-                        <div className="d-inline-flex align-items-center gap-2 px-3 py-1 rounded-pill gallery-pill mb-3">
+                        <div className="d-inline-flex align-items-center gap-2 px-3 py-1 rounded-pill gallery-pill mb-3 mx-auto mx-md-0">
                             <span className="pill-dot"></span>
                             <span className="fw-semibold text-uppercase tracking-wider small">Visual Journey</span>
                         </div>
@@ -82,10 +67,10 @@ const GallerySection = () => {
                         </p>
                     </div>
 
-                    <div className="mt-3 mt-md-0">
+                    <div className="mt-3 mt-md-0 w-100 w-md-auto" style={{ maxWidth: '240px' }}>
                         <Link 
                             to="/gallery" 
-                            className="btn btn-outline-primary rounded-pill px-4 py-2 fw-semibold d-inline-flex align-items-center gap-2 shadow-sm gallery-cta-btn"
+                            className="btn btn-outline-primary rounded-pill px-4 py-2 fw-semibold d-inline-flex align-items-center justify-content-center gap-2 shadow-sm gallery-cta-btn w-100 w-md-auto"
                         >
                             <span>View All Photos</span>
                             <i className="bi bi-arrow-right transition-transform"></i>
@@ -95,16 +80,24 @@ const GallerySection = () => {
 
                 {/* Gallery Cards Grid (Pure imagery, NO text overlays) */}
                 {loading ? (
-                    <div className="row g-4">
+                    <div className="row g-3 g-md-4">
                         {[1, 2, 3, 4, 5, 6].map((n) => (
-                            <div className="col-lg-4 col-md-6 col-12" key={n}>
+                            <div className="col-6 col-md-6 col-lg-4" key={n}>
                                 <div className="skeleton-card rounded-4"></div>
                             </div>
                         ))}
                     </div>
+                ) : images.length === 0 ? (
+                    <div className="row g-3 g-md-4">
+                        <div className="col-12 text-center py-5">
+                            <i className="bi bi-images text-muted fs-1 d-block mb-2"></i>
+                            <h5 className="text-muted fw-bold">No photos currently available</h5>
+                            <p className="text-muted small mb-0">New event photographs will appear here shortly.</p>
+                        </div>
+                    </div>
                 ) : (
-                    <div className="row g-4">
-                        {displayList.map((item, index) => {
+                    <div className="row g-3 g-md-4">
+                        {images.map((item, index) => {
                             const rawSrc = typeof item === 'string' ? item : (item.url || item.image || '');
                             const imageSrc = rawSrc.startsWith('http')
                                 ? rawSrc
@@ -112,7 +105,7 @@ const GallerySection = () => {
 
                             return (
                                 <div 
-                                    className="col-lg-4 col-md-6 col-12" 
+                                    className="col-6 col-md-6 col-lg-4" 
                                     key={item.id || index}
                                     data-aos="fade-up"
                                     data-aos-delay={index * 80}
@@ -129,9 +122,6 @@ const GallerySection = () => {
                                                 alt={`Gallery moment ${index + 1}`}
                                                 className="img-fluid w-100 h-100 gallery-img"
                                                 loading="lazy"
-                                                onError={(e) => {
-                                                    e.currentTarget.src = DEFAULT_GALLERY[index % DEFAULT_GALLERY.length].image;
-                                                }}
                                             />
                                         </div>
 
@@ -149,8 +139,8 @@ const GallerySection = () => {
                 )}
 
                 {/* Bottom interactive invitation strip */}
-                <div className="mt-5 p-4 rounded-4 gallery-bottom-strip d-flex flex-column flex-sm-row justify-content-between align-items-center gap-3 shadow-sm border" data-aos="fade-up" data-aos-delay="200">
-                    <div className="d-flex align-items-center gap-3 text-center text-sm-start">
+                <div className="mt-4 mt-md-5 p-3 p-md-4 rounded-4 gallery-bottom-strip d-flex flex-column flex-sm-row justify-content-between align-items-center gap-3 shadow-sm border" data-aos="fade-up" data-aos-delay="200">
+                    <div className="d-flex flex-column flex-sm-row align-items-center gap-3 text-center text-sm-start">
                         <div className="strip-icon-box rounded-circle d-flex align-items-center justify-content-center flex-shrink-0">
                             <i className="bi bi-camera-reels text-primary fs-4"></i>
                         </div>
@@ -159,7 +149,7 @@ const GallerySection = () => {
                             <p className="text-muted mb-0 small">Explore our extensive archive covering statewide conferences, campaigns, and campus events.</p>
                         </div>
                     </div>
-                    <Link to="/gallery" className="btn btn-primary rounded-pill px-4 py-2 flex-shrink-0 fw-semibold d-inline-flex align-items-center gap-2">
+                    <Link to="/gallery" className="btn btn-primary rounded-pill px-4 py-2 flex-shrink-0 fw-semibold d-inline-flex align-items-center justify-content-center gap-2 gallery-browse-btn">
                         <span>Browse Archive</span>
                         <i className="bi bi-chevron-right"></i>
                     </Link>
@@ -277,11 +267,16 @@ const GallerySection = () => {
                 }
                 @media (max-width: 576px) {
                     .gallery-img-wrapper, .skeleton-card {
-                        height: 210px;
+                        height: 160px;
                     }
-                    .gallery-cta-btn {
+                    .gallery-cta-btn, .gallery-browse-btn {
                         width: 100%;
                         justify-content: center;
+                    }
+                    .zoom-circle-btn {
+                        width: 38px;
+                        height: 38px;
+                        font-size: 15px;
                     }
                 }
             `}</style>

@@ -344,20 +344,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     /**
-     * HOME PAGE GALLERY PREVIEW
+     * HOME PAGE GALLERY PREVIEW (synced with Gallery page /api/gallery)
      */
     const homeGalleryContainer = document.getElementById('home-gallery-container') || document.querySelector('#gallery-preview .row.g-4');
     async function initHomeGallery() {
         if (!homeGalleryContainer) return;
-
-        const defaultGallery = [
-            { title: 'State Conference', image: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&auto=format&fit=crop&q=80', tag: 'Conference' },
-            { title: 'Leadership Summit', image: 'https://images.unsplash.com/photo-1511578314322-379afb476865?w=800&auto=format&fit=crop&q=80', tag: 'Leadership' },
-            { title: 'Student Excellence Meet', image: 'https://images.unsplash.com/photo-1523580494863-6f3031224c94?w=800&auto=format&fit=crop&q=80', tag: 'Students' },
-            { title: 'Educational Seminar', image: 'https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=800&auto=format&fit=crop&q=80', tag: 'Education' },
-            { title: 'Cultural & Arts Fest', image: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=800&auto=format&fit=crop&q=80', tag: 'Culture' },
-            { title: 'Annual State Gathering', image: 'https://images.unsplash.com/photo-1528605248644-14dd04022da1?w=800&auto=format&fit=crop&q=80', tag: 'Gathering' }
-        ];
 
         let images = [];
         try {
@@ -372,7 +363,15 @@ document.addEventListener('DOMContentLoaded', () => {
             console.error('Failed to load gallery preview:', e);
         }
 
-        if (images.length === 0) images = defaultGallery;
+        if (images.length === 0) {
+            homeGalleryContainer.innerHTML = `
+            <div class="col-12 text-center py-5">
+                <i class="bi bi-images text-muted fs-1 d-block mb-2"></i>
+                <h5 class="text-muted fw-bold">No photos currently available</h5>
+                <p class="text-muted small mb-0">New event photographs will appear here shortly.</p>
+            </div>`;
+            return;
+        }
 
         let html = '';
         images.forEach((item, index) => {
@@ -380,10 +379,10 @@ document.addEventListener('DOMContentLoaded', () => {
             const imgUrl = rawSrc.startsWith('http') || rawSrc.startsWith('assets/') ? rawSrc : buildApiUrl(rawSrc);
 
             html += `
-            <div class="col-lg-4 col-md-6 col-12" data-aos="fade-up" data-aos-delay="${index * 80}">
+            <div class="col-6 col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="${index * 80}">
                 <a href="${imgUrl}" class="home-gallery-lightbox gallery-card d-block rounded-4 overflow-hidden position-relative shadow-sm text-decoration-none" data-gallery="home-gallery">
                     <div class="gallery-img-wrapper">
-                        <img src="${imgUrl}" alt="Gallery moment ${index + 1}" class="img-fluid w-100 h-100 gallery-img" loading="lazy" onerror="this.src='${defaultGallery[index % defaultGallery.length].image}'">
+                        <img src="${imgUrl}" alt="Gallery moment ${index + 1}" class="img-fluid w-100 h-100 gallery-img" loading="lazy">
                     </div>
                     <div class="gallery-card-overlay d-flex align-items-center justify-content-center">
                         <div class="zoom-circle-btn shadow-lg">
