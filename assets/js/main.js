@@ -5,10 +5,23 @@
 
 // --- CONFIGURATION ---
 // Change this to your backend URL or set window.API_BASE in page HTML.
-const API_BASE = window.API_BASE || 'http://localhost:8000';
+const API_BASE = window.API_BASE || 'https://sksbv.in';
 
 function buildApiUrl(endpoint) {
     return `${API_BASE.replace(/\/$/, '')}${endpoint.startsWith('/') ? endpoint : `/${endpoint}`}`;
+}
+
+function buildMediaUrl(rawPath, isGallery = false) {
+    if (!rawPath) return '';
+    if (rawPath.startsWith('http://') || rawPath.startsWith('https://')) return rawPath;
+    if (rawPath.startsWith('assets/') || rawPath.startsWith('/assets/')) return rawPath;
+    const clean = rawPath.replace(/^\/+/, '');
+    if (clean.startsWith('media/')) {
+        return `${API_BASE.replace(/\/$/, '')}/${clean}`;
+    }
+    return isGallery
+        ? `${API_BASE.replace(/\/$/, '')}/media/gallery/${clean}`
+        : `${API_BASE.replace(/\/$/, '')}/media/${clean}`;
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -168,7 +181,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const notificationsContainer = document.getElementById('notifications-container');
 
     async function initNotifications() {
-        const data = await fetchData('/api/notifications/');
+        const data = await fetchData('/api/notifications');
         if (!data) return;
 
         const notifications = (data && typeof data === 'object') ? (Array.isArray(data) ? data : (data.results || data.notifications || [])) : [];
@@ -219,7 +232,7 @@ document.addEventListener('DOMContentLoaded', () => {
     async function initCirculars() {
         if (!circularsContainer) return;
 
-        const data = await fetchData('/api/circular/');
+        const data = await fetchData('/api/circular');
         if (!data) {
             circularsContainer.innerHTML = '<div class="text-center py-5 text-danger">Error loading circulars. API may be offline.</div>';
             return;
@@ -233,7 +246,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         let html = '';
         circulars.forEach(item => {
-            const fileUrl = item.file && item.file.startsWith('http') ? item.file : buildApiUrl(item.file || '');
+            const fileUrl = item.file ? buildMediaUrl(item.file, false) : '#';
             html += `
             <a href="${fileUrl}" target="_blank" rel="noopener noreferrer" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center p-3">
                 <div>
@@ -254,7 +267,7 @@ document.addEventListener('DOMContentLoaded', () => {
     async function initGallery() {
         if (!gallerySection && !galleryGrid) return;
 
-        const data = await fetchData('/api/gallery/');
+        const data = await fetchData('/api/gallery');
         if (!data) return;
 
         const images = (data && typeof data === 'object') ? (Array.isArray(data) ? data : (data.results || data.images || [])) : [];
@@ -278,7 +291,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let html = '';
         images.forEach((item, index) => {
             const rawSrc = typeof item === 'string' ? item : (item.url || item.image || '');
-            const imgUrl = rawSrc.startsWith('http') || rawSrc.startsWith('assets/') ? rawSrc : buildApiUrl(rawSrc);
+            const imgUrl = buildMediaUrl(rawSrc, true);
             html += `
             <div class="col-6 col-md-4 col-lg-3" data-aos="fade-up" data-aos-delay="${(index % 4) * 60}">
                 <a href="${imgUrl}" class="full-gallery-lightbox gallery-item-card d-block rounded-4 overflow-hidden position-relative shadow-sm text-decoration-none" data-gallery="state-gallery">
@@ -320,9 +333,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         
         const endpoints = {
-            'State Leaders': '/api/leaders/',
-            'Working Committee': '/api/working-committee/',
-            'District Leaders': '/api/district-leaders/'
+            'State Leaders': '/api/leaders',
+            'Working Committee': '/api/working-committee',
+            'District Leaders': '/api/district-leaders'
         };
 
         const renderLeaders = async (endpoint) => {
@@ -347,8 +360,8 @@ document.addEventListener('DOMContentLoaded', () => {
             let html = '';
             leaders.forEach(leader => {
                 let imgUrl = leader.image || leader.url || leader.photo || '';
-                if (imgUrl && !imgUrl.startsWith('http')) {
-                    imgUrl = buildApiUrl(imgUrl);
+                if (imgUrl) {
+                    imgUrl = buildMediaUrl(imgUrl, false);
                 }
                 if (!imgUrl) {
                     const namePrefix = leader.name ? leader.name.split(' ')[0] : 'Leader';
@@ -394,7 +407,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         let images = [];
         try {
-            const data = await fetchData('/api/gallery/');
+            const data = await fetchData('/api/gallery');
             if (data && typeof data === 'object') {
                 const list = Array.isArray(data) ? data : (data.results || data.images || []);
                 if (list.length > 0) {
@@ -418,7 +431,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let html = '';
         images.forEach((item, index) => {
             const rawSrc = typeof item === 'string' ? item : (item.url || item.image || '');
-            const imgUrl = rawSrc.startsWith('http') || rawSrc.startsWith('assets/') ? rawSrc : buildApiUrl(rawSrc);
+            const imgUrl = buildMediaUrl(rawSrc, true);
 
             html += `
             <div class="col-6 col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="${index * 80}">
