@@ -5,9 +5,13 @@ const rootDir = process.cwd();
 const backupStaticSite = path.join(rootDir, 'backup_static_site', 'assets');
 const targetAssets = path.join(rootDir, 'assets');
 
-// 1. Copy Vendor and JS files from backup to the new assets directory
-fs.cpSync(path.join(backupStaticSite, 'vendor'), path.join(targetAssets, 'vendor'), { recursive: true });
-fs.cpSync(path.join(backupStaticSite, 'js'), path.join(targetAssets, 'js'), { recursive: true });
+// 1. Copy Vendor and JS files from backup to the new assets directory if present
+if (fs.existsSync(path.join(backupStaticSite, 'vendor'))) {
+    fs.cpSync(path.join(backupStaticSite, 'vendor'), path.join(targetAssets, 'vendor'), { recursive: true });
+}
+if (fs.existsSync(path.join(backupStaticSite, 'js'))) {
+    fs.cpSync(path.join(backupStaticSite, 'js'), path.join(targetAssets, 'js'), { recursive: true });
+}
 
 const scriptsToInject = `
   <!-- Vendor JS Files -->

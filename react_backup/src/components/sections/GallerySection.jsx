@@ -105,8 +105,10 @@ const GallerySection = () => {
                 ) : (
                     <div className="row g-4">
                         {displayList.map((item, index) => {
-                            const rawSrc = typeof item === 'string' ? item : (item.image || item.url || '');
-                            const imageSrc = rawSrc.startsWith('http') || rawSrc.startsWith('/') ? rawSrc : `/${rawSrc}`;
+                            const rawSrc = typeof item === 'string' ? item : (item.url || item.image || '');
+                            const imageSrc = rawSrc.startsWith('http')
+                                ? rawSrc
+                                : (rawSrc.startsWith('/assets/') ? rawSrc : API.buildUrl(rawSrc));
 
                             return (
                                 <div 

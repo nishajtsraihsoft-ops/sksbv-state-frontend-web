@@ -14,7 +14,30 @@ function buildApiUrl(endpoint) {
 document.addEventListener('DOMContentLoaded', () => {
 
     /**
-     * Mobile nav toggle
+     * Header scroll behavior (transparent over Hero on Home page)
+     */
+    const header = document.getElementById('header');
+    const mobileNavCard = document.querySelector('.mobile-nav-right-card');
+    if (header) {
+        const isHomePage = header.classList.contains('header-over-hero') ||
+            document.body.classList.contains('index-page');
+        const updateHeaderScroll = () => {
+            const scrolled = window.scrollY > 20;
+            header.classList.toggle('header-scrolled', scrolled);
+            header.classList.toggle('shadow-sm', scrolled);
+            if (isHomePage) {
+                header.classList.toggle('header-over-hero', !scrolled);
+            }
+            if (mobileNavCard) {
+                mobileNavCard.classList.toggle('scrolled-top', scrolled);
+            }
+        };
+        updateHeaderScroll();
+        window.addEventListener('scroll', updateHeaderScroll, { passive: true });
+    }
+
+    /**
+     * Mobile nav toggle (supports both legacy and new right-card mobile nav)
      */
     const mobileNavToggleBtn = document.querySelector('.mobile-nav-toggle');
     if (mobileNavToggleBtn) {
@@ -26,6 +49,52 @@ document.addEventListener('DOMContentLoaded', () => {
             document.body.classList.toggle('mobile-nav-active');
         });
     }
+
+    const mobileToggleBtnNew = document.querySelector('.mobile-nav-toggle-btn');
+    const mobileBackdrop = document.querySelector('.mobile-nav-backdrop');
+    const mobileCloseBtn = document.querySelector('.card-close-btn');
+
+    const closeMobileCardNav = () => {
+        if (mobileToggleBtnNew) {
+            mobileToggleBtnNew.classList.remove('active');
+            mobileToggleBtnNew.setAttribute('aria-expanded', 'false');
+        }
+        if (mobileBackdrop) {
+            mobileBackdrop.classList.remove('show');
+            mobileBackdrop.setAttribute('aria-hidden', 'true');
+        }
+        if (mobileNavCard) {
+            mobileNavCard.classList.remove('card-open');
+        }
+    };
+
+    if (mobileToggleBtnNew && mobileNavCard) {
+        mobileToggleBtnNew.addEventListener('click', (e) => {
+            e.preventDefault();
+            const isOpen = mobileNavCard.classList.toggle('card-open');
+            mobileToggleBtnNew.classList.toggle('active', isOpen);
+            mobileToggleBtnNew.setAttribute('aria-expanded', String(isOpen));
+            if (mobileBackdrop) {
+                mobileBackdrop.classList.toggle('show', isOpen);
+                mobileBackdrop.setAttribute('aria-hidden', String(!isOpen));
+            }
+        });
+    }
+    if (mobileBackdrop) mobileBackdrop.addEventListener('click', closeMobileCardNav);
+    if (mobileCloseBtn) mobileCloseBtn.addEventListener('click', closeMobileCardNav);
+
+    document.querySelectorAll('.card-accordion-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const isOpen = btn.classList.toggle('open');
+            btn.setAttribute('aria-expanded', String(isOpen));
+            const arrow = btn.querySelector('.accordion-arrow');
+            if (arrow) arrow.classList.toggle('rotated', isOpen);
+            const submenu = btn.nextElementSibling;
+            if (submenu && submenu.classList.contains('card-submenu')) {
+                submenu.classList.toggle('submenu-open', isOpen);
+            }
+        });
+    });
 
     /**
      * Mobile nav dropdowns
@@ -147,9 +216,10 @@ document.addEventListener('DOMContentLoaded', () => {
     /**
      * GALLERY
      */
-    const galleryGrid = document.querySelector('.gallery-grid');
+    const gallerySection = document.getElementById('gallery');
+    const galleryGrid = document.querySelector('.gallery-grid') || (gallerySection ? gallerySection.querySelector('.row') : null);
     async function initGallery() {
-        if (!galleryGrid) return;
+        if (!gallerySection && !galleryGrid) return;
 
         const data = await fetchData('/api/gallery');
         if (!data) return;
@@ -157,22 +227,43 @@ document.addEventListener('DOMContentLoaded', () => {
         const images = (data && typeof data === 'object') ? (Array.isArray(data) ? data : (data.results || data.images || [])) : [];
         if (images.length === 0) return;
 
+        let targetRow = galleryGrid;
+        if (!targetRow && gallerySection) {
+            const container = gallerySection.querySelector('.container');
+            const emptyState = container ? container.querySelector('.text-center.py-5') : null;
+            if (emptyState) {
+                targetRow = document.createElement('div');
+                targetRow.className = 'row g-3 g-md-4';
+                emptyState.replaceWith(targetRow);
+            }
+        }
+        if (!targetRow) return;
+
+        const countLabel = gallerySection ? gallerySection.querySelector('.text-muted.small.fw-medium') : null;
+        if (countLabel) countLabel.textContent = `Showing ${images.length} Captured Moments`;
+
         let html = '';
-        images.forEach((img, index) => {
-            const imgUrl = img.image && img.image.startsWith('http') ? img.image : buildApiUrl(img.image || '');
+        images.forEach((item, index) => {
+            const rawSrc = typeof item === 'string' ? item : (item.url || item.image || '');
+            const imgUrl = rawSrc.startsWith('http') || rawSrc.startsWith('assets/') ? rawSrc : buildApiUrl(rawSrc);
             html += `
-            <div class="gallery-item">
-                <img alt="Gallery ${index + 1}" src="${imgUrl}">
-                <div class="gallery-overlay">
-                    <a href="${imgUrl}" class="glightbox zoom-btn" title="${img.title || ''}"><i class="bi bi-zoom-in"></i></a>
-                </div>
+            <div class="col-6 col-md-4 col-lg-3" data-aos="fade-up" data-aos-delay="${(index % 4) * 60}">
+                <a href="${imgUrl}" class="full-gallery-lightbox gallery-item-card d-block rounded-4 overflow-hidden position-relative shadow-sm text-decoration-none" data-gallery="state-gallery">
+                    <div class="gallery-photo-wrapper">
+                        <img src="${imgUrl}" alt="Gallery moment ${index + 1}" class="img-fluid w-100 h-100 photo-img" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=600&auto=format&fit=crop&q=80'">
+                    </div>
+                    <div class="gallery-hover-overlay d-flex align-items-center justify-content-center">
+                        <div class="zoom-circle-action shadow-lg">
+                            <i class="bi bi-arrows-fullscreen"></i>
+                        </div>
+                    </div>
+                </a>
             </div>`;
         });
-        galleryGrid.innerHTML = html;
+        targetRow.innerHTML = html;
 
-        // Re-init GLightbox if available
         if (window.GLightbox) {
-            GLightbox({ selector: '.glightbox' });
+            GLightbox({ selector: '.full-gallery-lightbox', touchNavigation: true, loop: true, zoomable: true });
         }
     }
 
@@ -255,7 +346,7 @@ document.addEventListener('DOMContentLoaded', () => {
     /**
      * HOME PAGE GALLERY PREVIEW
      */
-    const homeGalleryContainer = document.getElementById('home-gallery-container');
+    const homeGalleryContainer = document.getElementById('home-gallery-container') || document.querySelector('#gallery-preview .row.g-4');
     async function initHomeGallery() {
         if (!homeGalleryContainer) return;
 
@@ -285,16 +376,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
         let html = '';
         images.forEach((item, index) => {
-            const rawSrc = typeof item === 'string' ? item : (item.image || item.url || '');
-            const imgUrl = rawSrc.startsWith('http') || rawSrc.startsWith('/') ? rawSrc : buildApiUrl(rawSrc);
-            const title = item.title && item.title !== '1' ? item.title : `SKSBV Event Moment #${index + 1}`;
-            const tag = item.tag || 'SKSBV State';
+            const rawSrc = typeof item === 'string' ? item : (item.url || item.image || '');
+            const imgUrl = rawSrc.startsWith('http') || rawSrc.startsWith('assets/') ? rawSrc : buildApiUrl(rawSrc);
 
             html += `
             <div class="col-lg-4 col-md-6 col-12" data-aos="fade-up" data-aos-delay="${index * 80}">
-                <a href="${imgUrl}" class="glightbox gallery-card d-block rounded-4 overflow-hidden position-relative shadow-sm text-decoration-none" data-gallery="home-gallery">
+                <a href="${imgUrl}" class="home-gallery-lightbox gallery-card d-block rounded-4 overflow-hidden position-relative shadow-sm text-decoration-none" data-gallery="home-gallery">
                     <div class="gallery-img-wrapper">
-                        <img src="${imgUrl}" alt="Gallery photo ${index + 1}" class="img-fluid w-100 h-100 gallery-img" loading="lazy" onerror="this.src='${defaultGallery[index % defaultGallery.length].image}'">
+                        <img src="${imgUrl}" alt="Gallery moment ${index + 1}" class="img-fluid w-100 h-100 gallery-img" loading="lazy" onerror="this.src='${defaultGallery[index % defaultGallery.length].image}'">
                     </div>
                     <div class="gallery-card-overlay d-flex align-items-center justify-content-center">
                         <div class="zoom-circle-btn shadow-lg">
@@ -308,8 +397,104 @@ document.addEventListener('DOMContentLoaded', () => {
         homeGalleryContainer.innerHTML = html;
 
         if (window.GLightbox) {
-            GLightbox({ selector: '.glightbox' });
+            GLightbox({ selector: '.home-gallery-lightbox', touchNavigation: true, loop: true, zoomable: true });
         }
+    }
+
+    /**
+     * HERO BACKGROUND CAROUSEL
+     */
+    const heroSlides = document.querySelectorAll('.hero-bg-slide');
+    const heroBadgeText = document.querySelector('.hero-top-badge span:last-child');
+    if (heroSlides.length > 1) {
+        const heroTags = [
+            'Visionary Leadership \u2022 Moral Excellence',
+            'Empowering Students Across Kerala',
+            '30+ Years of Educational Guidance'
+        ];
+        let currentHeroSlide = 0;
+        setInterval(() => {
+            heroSlides[currentHeroSlide].classList.remove('slide-active');
+            heroSlides[currentHeroSlide].setAttribute('aria-hidden', 'true');
+            currentHeroSlide = (currentHeroSlide + 1) % heroSlides.length;
+            heroSlides[currentHeroSlide].classList.add('slide-active');
+            heroSlides[currentHeroSlide].setAttribute('aria-hidden', 'false');
+            if (heroBadgeText && heroTags[currentHeroSlide]) {
+                heroBadgeText.textContent = heroTags[currentHeroSlide];
+            }
+        }, 6500);
+    }
+
+    /**
+     * ABOUT SECTION MISSION / VISION / VALUES PILLAR TABS
+     */
+    const pillarTabs = document.querySelectorAll('.about-creative-section .pillar-tab-btn');
+    const pillarCard = document.querySelector('.about-creative-section .active-pillar-card');
+    if (pillarTabs.length > 0 && pillarCard) {
+        const pillars = [
+            {
+                title: 'Our Mission',
+                subtitle: 'Moral & Spiritual Foundation',
+                icon: 'bi-bullseye',
+                color: '#0d83fd',
+                description: 'Rooted in the principles of Samastha, we foster moral discipline, exemplary conduct, and meaningful student-mentor bonds across every madrassa unit.',
+                points: ['Character & Adab building', 'Strong Ustad-Student camaraderie']
+            },
+            {
+                title: 'Our Vision',
+                subtitle: 'Future-Ready Leadership',
+                icon: 'bi-eye-fill',
+                color: '#10b981',
+                description: 'Instilling authentic Islamic values while equipping young students with contemporary leadership, communication, and organizational skills for a brighter tomorrow.',
+                points: ['Creative talent empowerment', 'Confident community leadership']
+            },
+            {
+                title: 'Core Values',
+                subtitle: 'Ahlussunnah Principles',
+                icon: 'bi-shield-heart',
+                color: '#f59e0b',
+                description: "Upholding Ahlussunnah wal Jama'ah ideals, mutual respect, communal harmony, and unwavering dedication to authentic educational excellence.",
+                points: ['Peace & communal amity', 'Authentic scholarly guidance']
+            }
+        ];
+
+        pillarTabs.forEach((btn, idx) => {
+            btn.addEventListener('click', () => {
+                const p = pillars[idx];
+                if (!p) return;
+                pillarTabs.forEach((b, i) => b.classList.toggle('tab-active', i === idx));
+                pillarCard.style.setProperty('--active-color', p.color);
+                const leftBar = pillarCard.querySelector('.pillar-left-bar');
+                if (leftBar) leftBar.style.background = p.color;
+                const iconBox = pillarCard.querySelector('.active-pillar-icon');
+                if (iconBox) {
+                    iconBox.style.background = `${p.color}15`;
+                    iconBox.style.color = p.color;
+                    const iconEl = iconBox.querySelector('i');
+                    if (iconEl) iconEl.className = `bi ${p.icon} fs-4`;
+                }
+                const titleEl = pillarCard.querySelector('h4');
+                if (titleEl) titleEl.textContent = p.title;
+                const subEl = pillarCard.querySelector('h4 + span');
+                if (subEl) {
+                    subEl.textContent = p.subtitle;
+                    subEl.style.color = p.color;
+                }
+                const descEl = pillarCard.querySelector('p');
+                if (descEl) descEl.textContent = p.description;
+                const pointEls = pillarCard.querySelectorAll('.bi-check-circle-fill');
+                pointEls.forEach((icon, i) => {
+                    icon.style.color = p.color;
+                    if (icon.nextElementSibling && p.points[i]) {
+                        icon.nextElementSibling.textContent = p.points[i];
+                    }
+                });
+            });
+        });
+    }
+
+    if (window.AOS) {
+        window.AOS.init({ duration: 600, easing: 'ease-in-out', once: true, mirror: false });
     }
 
     // --- RUN EVERY PAGE INIT ---

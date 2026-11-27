@@ -89,7 +89,10 @@ const Gallery = () => {
           ) : (
             <div className="row g-3 g-md-4">
               {images.map((item, index) => {
-                const src = typeof item === 'string' ? item : item.url || item.image || '';
+                const rawSrc = typeof item === 'string' ? item : (item.url || item.image || '');
+                const src = rawSrc.startsWith('http')
+                  ? rawSrc
+                  : (rawSrc.startsWith('/assets/') ? rawSrc : API.buildUrl(rawSrc));
 
                 return (
                   <div className="col-6 col-md-4 col-lg-3" key={item.id || index} data-aos="fade-up" data-aos-delay={(index % 4) * 60}>
